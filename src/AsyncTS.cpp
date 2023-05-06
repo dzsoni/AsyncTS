@@ -1572,7 +1572,7 @@ int AsyncTS::setElevation(float elevation)
 */
 int AsyncTS::setStatus(String status)
 {
-    DEBUG_ATS("ts::setStatus(status: %s)",status);
+    DEBUG_ATS("ts::setStatus(status: %s)\r\n",status);
 
     // Max # bytes for ThingSpeak field is 255 (UTF-8)
     if (status.length() > FIELDLENGTH_MAX)
