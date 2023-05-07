@@ -890,7 +890,6 @@ bool AsyncTS::writeFields(unsigned long channelNumber, const char *writeAPIKey)
     {
         // setField was not called before writeFields
         _lastTSerrorcode = TS_ERR_SETFIELD_NOT_CALLED;
-        ;
         if (_writeResponseUserCB)
         {
             _writeResponseUserCB(_lastTSerrorcode);
