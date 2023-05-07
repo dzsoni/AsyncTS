@@ -479,10 +479,6 @@ bool AsyncTS::writeRaw(unsigned long channelNumber, String postMessage, const ch
     {
         DEBUG_ATS("ats::writeRaw Clinet is busy.");
         _lastTSerrorcode = TS_ERR_CONNECT_FAILED;
-        if (_writeResponseUserCB)
-        {
-            _writeResponseUserCB(_lastTSerrorcode);
-        }
         return false;
     }
     _response.flush();
@@ -878,10 +874,6 @@ bool AsyncTS::writeFields(unsigned long channelNumber, const char *writeAPIKey)
     {
         DEBUG_ATS("ats::writeFields Clinet is busy.")
         _lastTSerrorcode = TS_ERR_CONNECT_FAILED;
-        if (_writeResponseUserCB)
-        {
-            _writeResponseUserCB(_lastTSerrorcode);
-        }
         return false;
     }
     _response.flush();
@@ -898,7 +890,6 @@ bool AsyncTS::writeFields(unsigned long channelNumber, const char *writeAPIKey)
         {
             _writeResponseUserCB(_lastTSerrorcode);
         }
-        _setState(RESCOMPLETE);
         return false;
     }
     _request.write("POST /update HTTP/1.1\r\n");
