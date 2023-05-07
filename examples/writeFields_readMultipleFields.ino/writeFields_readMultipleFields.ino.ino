@@ -26,7 +26,7 @@ void writeServerResponse(int code)
 {
   Serial.println("Server response:" + String(code));
 }
-// User call back function for read action
+
 void readReadMultipleFieldsResponse(int code,std::any* resp)
 {
   
