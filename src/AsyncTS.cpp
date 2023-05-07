@@ -878,10 +878,6 @@ bool AsyncTS::writeFields(unsigned long channelNumber, const char *writeAPIKey)
     {
         DEBUG_ATS("ats::writeFields Clinet is busy.")
         _lastTSerrorcode = TS_ERR_CONNECT_FAILED;
-        if (_writeResponseUserCB)
-        {
-            _writeResponseUserCB(_lastTSerrorcode);
-        }
         return false;
     }
     _response.flush();
