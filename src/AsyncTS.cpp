@@ -519,7 +519,7 @@ bool AsyncTS::writeRaw(unsigned long channelNumber, String postMessage, const ch
 bool AsyncTS::_readRaw(unsigned long channelNumber, String suffixURL, const char *readAPIKey)
 {
     DEBUG_ATS("ats::readRaw (channelNumber: %lu  readAPIkey: %s suffixURL: \"%s\r\n", channelNumber, readAPIKey, suffixURL.c_str());
-
+    _lastTSerrorcode=TS_OK_SUCCESS;
     if (_state != DISCONNECTED)
     {
         DEBUG_ATS("ats::readRaw Clinet is busy.");
