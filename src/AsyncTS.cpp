@@ -379,8 +379,6 @@ void AsyncTS::_onData(void *Vbuf, size_t len)
 
     if (_response.available() >= _contentLength)
     {
-        _resetWriteFields();
-
         if (_writesession)
         {
             if (_response.readString().toInt() == 0)
@@ -502,7 +500,6 @@ bool AsyncTS::writeRaw(unsigned long channelNumber, String postMessage, const ch
     if (!_connectThingSpeak())
         return false;
     //_state = CONNECTING
-    _resetWriteFields();
     return true;
 }
 
@@ -702,7 +699,6 @@ bool AsyncTS::writeField(unsigned long channelNumber, unsigned int field, String
     if (_state != DISCONNECTED)
     {
         DEBUG_ATS("ats::writeField Clinet is busy.")
-        _lastTSerrorcode = TS_ERR_CONNECT_FAILED;
         return false;
     }
     // Invalid field number specified
