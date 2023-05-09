@@ -699,6 +699,7 @@ bool AsyncTS::writeField(unsigned long channelNumber, unsigned int field, String
     if (_state != DISCONNECTED)
     {
         DEBUG_ATS("ats::writeField Clinet is busy.")
+        _lastTSerrorcode = TS_ERR_CONNECT_FAILED;
         return false;
     }
     // Invalid field number specified
@@ -869,6 +870,7 @@ bool AsyncTS::writeFields(unsigned long channelNumber, const char *writeAPIKey)
     if (_state != DISCONNECTED)
     {
         DEBUG_ATS("ats::writeFields Clinet is busy.\r\n")
+        _lastTSerrorcode = TS_ERR_CONNECT_FAILED;
         return false;
     }
     _response.flush();
