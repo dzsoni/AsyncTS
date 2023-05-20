@@ -702,7 +702,13 @@ Public Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>if false - client is busy, can't connect. </dd></dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">false</td><td><a class="el" href="class_async_t_s.html">AsyncTS</a> client is busy. Couldn't send the request. </td></tr>
+    <tr><td class="paramname">true</td><td>request is under sending. </td></tr>
+  </table>
+  </dd>
+</dl>
 <dl class="section post"><dt>Postcondition</dt><dd>User's callback need process std::any&lt;String&gt;*. </dd></dl>
 
 </div>
@@ -734,7 +740,8 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Read the created-at timestamp associated with the latest update to a private ThingSpeak channel. </p>
-<dl class="section pre"><dt>Precondition</dt><dd>Call <a class="el" href="class_async_t_s.html#ac1a7c99f999052e49aa4db87bbf58a78" title="Set the callback function to process the server reponse. The user&#39;s function is called after these &#39;r...">onReadServerResponseUserCB()</a> before.</dd></dl>
+<dl class="section pre"><dt>Precondition</dt><dd>Call <a class="el" href="class_async_t_s.html#ac1a7c99f999052e49aa4db87bbf58a78" title="Set the callback function to process the server reponse. The user&#39;s function is called after these &#39;r...">onReadServerResponseUserCB()</a> before. </dd></dl>
+<dl class="section post"><dt>Postcondition</dt><dd>User's callback need process std::any&lt;String&gt;*.</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">channelNumber</td><td>Channel number </td></tr>
@@ -742,8 +749,13 @@ Public Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>if false - client is busy, can't connect. </dd></dl>
-<dl class="section post"><dt>Postcondition</dt><dd>User's callback need process std::any&lt;String&gt;*. </dd></dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">false</td><td><a class="el" href="class_async_t_s.html">AsyncTS</a> client is busy. Couldn't send the request. </td></tr>
+    <tr><td class="paramname">true</td><td>request is under sending. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -788,7 +800,13 @@ Public Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>if false - client is busy, can't connect. </dd></dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">false</td><td><a class="el" href="class_async_t_s.html">AsyncTS</a> client is busy. Couldn't send the request. </td></tr>
+    <tr><td class="paramname">true</td><td>request is under sending. </td></tr>
+  </table>
+  </dd>
+</dl>
 <dl class="section post"><dt>Postcondition</dt><dd>User's callback need process std::any&lt;String&gt;*. </dd></dl>
 
 </div>
@@ -827,7 +845,13 @@ Public Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>if false - client is busy, can't connect. </dd></dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">false</td><td><a class="el" href="class_async_t_s.html">AsyncTS</a> client is busy. Couldn't send the request. </td></tr>
+    <tr><td class="paramname">true</td><td>request is under sending. </td></tr>
+  </table>
+  </dd>
+</dl>
 <dl class="section post"><dt>Postcondition</dt><dd>User's callback need process std::any&lt;String&gt;*. </dd></dl>
 
 </div>
@@ -860,6 +884,7 @@ Public Attributes</h2></td></tr>
 
 <p>Read the latest floating point value from a public ThingSpeak channel. </p>
 <dl class="section pre"><dt>Precondition</dt><dd>First call <a class="el" href="class_async_t_s.html#ac1a7c99f999052e49aa4db87bbf58a78" title="Set the callback function to process the server reponse. The user&#39;s function is called after these &#39;r...">onReadServerResponseUserCB()</a>, to set the user's callback function. </dd></dl>
+<dl class="section post"><dt>Postcondition</dt><dd>Through user' callback: std::any&lt;float&gt;* points a value or 0 if the field is text or there is an error. </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">channelNumber</td><td>Channel number </td></tr>
@@ -867,7 +892,13 @@ Public Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>If false - client is busy, can't connect.(Through ruscb: std::any&lt;float&gt;* points a value or 0 if the field is text or there is an error.) </dd></dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">false</td><td><a class="el" href="class_async_t_s.html">AsyncTS</a> client is busy. Couldn't send the request. </td></tr>
+    <tr><td class="paramname">true</td><td>request is under sending. </td></tr>
+  </table>
+  </dd>
+</dl>
 <dl class="section note"><dt>Note</dt><dd>NAN, INFINITY, and -INFINITY are valid results. </dd></dl>
 
 </div>
@@ -906,6 +937,7 @@ Public Attributes</h2></td></tr>
 
 <p>Read the latest floating point value from a private ThingSpeak channel. </p>
 <dl class="section pre"><dt>Precondition</dt><dd>First call <a class="el" href="class_async_t_s.html#ac1a7c99f999052e49aa4db87bbf58a78" title="Set the callback function to process the server reponse. The user&#39;s function is called after these &#39;r...">onReadServerResponseUserCB()</a>, to set the user's callback function. </dd></dl>
+<dl class="section post"><dt>Postcondition</dt><dd>Through user' callback: std::any&lt;float&gt;* points a value or 0 if the field is text or there is an error. </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">channelNumber</td><td>Channel number </td></tr>
@@ -914,7 +946,13 @@ Public Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>If false - client is busy, can't connect.(Through ruscb: std::any&lt;float&gt;* points a value or 0 if the field is text or there is an error.) </dd></dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">false</td><td><a class="el" href="class_async_t_s.html">AsyncTS</a> client is busy. Couldn't send the request. </td></tr>
+    <tr><td class="paramname">true</td><td>request is under sending. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -966,8 +1004,14 @@ Public Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>If false - client is busy, can't connect.(Through ruscb: std::any&lt;float&gt;* points a value or 0 if the field is text or there is an error.) </dd></dl>
-<dl class="section note"><dt>Note</dt><dd>NAN, INFINITY, and -INFINITY are valid results. </dd></dl>
+<dl class="section post"><dt>Postcondition</dt><dd>Through user' callback: std::any&lt;float&gt;* points a value or 0 if the field is text or there is an error. </dd></dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">false</td><td><a class="el" href="class_async_t_s.html">AsyncTS</a> client is busy. Couldn't send the request. </td></tr>
+    <tr><td class="paramname">true</td><td>request is under sending. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -1004,6 +1048,7 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Read the latest floating point value from a public ThingSpeak channel. </p>
+<dl class="section post"><dt>Postcondition</dt><dd>Through ruscb: std::any&lt;float&gt;* points a value or 0 if the field is text or there is an error. </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">channelNumber</td><td>Channel number </td></tr>
@@ -1012,7 +1057,13 @@ Public Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>If false - client is busy, can't connect.(Through ruscb: std::any&lt;float&gt;* points a value or 0 if the field is text or there is an error.) </dd></dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">false</td><td><a class="el" href="class_async_t_s.html">AsyncTS</a> client is busy. Couldn't send the request. </td></tr>
+    <tr><td class="paramname">true</td><td>request is under sending. </td></tr>
+  </table>
+  </dd>
+</dl>
 <dl class="section note"><dt>Note</dt><dd>NAN, INFINITY, and -INFINITY are valid results. </dd></dl>
 
 </div>
@@ -1052,7 +1103,14 @@ Public Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>If false - client is busy, can't connect. (Through ruscb: std::any&lt;int&gt;* points a value or 0 if the field is text or there is an error.) </dd></dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">false</td><td><a class="el" href="class_async_t_s.html">AsyncTS</a> client is busy. Couldn't send the request. </td></tr>
+    <tr><td class="paramname">true</td><td>request is under sending. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section post"><dt>Postcondition</dt><dd>Through user's callback function: std::any&lt;int&gt;* points a value or 0 if the field is text or there is an error. </dd></dl>
 <dl class="section note"><dt>Note</dt><dd>NAN, INFINITY, and -INFINITY are valid results. </dd></dl>
 
 </div>
@@ -1099,7 +1157,14 @@ Public Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>If false - client is busy, can't connect. (Through ruscb: std::any&lt;int&gt;* points a value or 0 if the field is text or there is an error.) </dd></dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">false</td><td><a class="el" href="class_async_t_s.html">AsyncTS</a> client is busy. Couldn't send the request. </td></tr>
+    <tr><td class="paramname">true</td><td>request is under sending. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section post"><dt>Postcondition</dt><dd>Through user's callback function: std::any&lt;int&gt;* points a value or 0 if the field is text or there is an error. </dd></dl>
 <dl class="section note"><dt>Note</dt><dd>NAN, INFINITY, and -INFINITY are valid results. </dd></dl>
 
 </div>
@@ -1152,7 +1217,14 @@ Public Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>If false - client is busy, can't connect. (Through ruscb: std::any&lt;int&gt;* points a value or 0 if the field is text or there is an error.) </dd></dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">false</td><td><a class="el" href="class_async_t_s.html">AsyncTS</a> client is busy. Couldn't send the request. </td></tr>
+    <tr><td class="paramname">true</td><td>request is under sending. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section post"><dt>Postcondition</dt><dd>Through ruscb: std::any&lt;int&gt;* points a value or 0 if the field is text or there is an error. </dd></dl>
 <dl class="section note"><dt>Note</dt><dd>NAN, INFINITY, and -INFINITY are valid results. </dd></dl>
 
 </div>
@@ -1198,7 +1270,14 @@ Public Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>If false - client is busy, can't connect. (Through ruscb: std::any&lt;int&gt;* points a value or 0 if the field is text or there is an error.) </dd></dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">false</td><td><a class="el" href="class_async_t_s.html">AsyncTS</a> client is busy. Couldn't send the request. </td></tr>
+    <tr><td class="paramname">true</td><td>request is under sending. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section post"><dt>Postcondition</dt><dd>Through ruscb: std::any&lt;int&gt;* points a value or 0 if the field is text or there is an error. </dd></dl>
 <dl class="section note"><dt>Note</dt><dd>NAN, INFINITY, and -INFINITY are valid results. </dd></dl>
 
 </div>
@@ -1238,7 +1317,14 @@ Public Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>If false - client is busy, can't connect. (Through ruscb: std::any&lt;long&gt;* points a value or 0 if the field is text or there is an error.) </dd></dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">false</td><td><a class="el" href="class_async_t_s.html">AsyncTS</a> client is busy. Couldn't send the request. </td></tr>
+    <tr><td class="paramname">true</td><td>request is under sending. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section post"><dt>Postcondition</dt><dd>Through user's callback function: std::any&lt;long&gt;* points a value or 0 if the field is text or there is an error. </dd></dl>
 <dl class="section note"><dt>Note</dt><dd>NAN, INFINITY, and -INFINITY are valid results. </dd></dl>
 
 </div>
@@ -1285,7 +1371,14 @@ Public Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>If false - client is busy, can't connect.(Through ruscb: std::any&lt;long&gt;* points a value or 0 if the field is text or there is an error.) </dd></dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">false</td><td><a class="el" href="class_async_t_s.html">AsyncTS</a> client is busy. Couldn't send the request. </td></tr>
+    <tr><td class="paramname">true</td><td>request is under sending. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section post"><dt>Postcondition</dt><dd>Through user's callback function: std::any&lt;long&gt;* points a value or 0 if the field is text or there is an error. </dd></dl>
 <dl class="section note"><dt>Note</dt><dd>NAN, INFINITY, and -INFINITY are valid results. </dd></dl>
 
 </div>
@@ -1338,7 +1431,14 @@ Public Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>If false - client is busy, can't connect.(Through ruscb: std::any&lt;long&gt;* points a value or 0 if the field is text or there is an error.) </dd></dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">false</td><td><a class="el" href="class_async_t_s.html">AsyncTS</a> client is busy. Couldn't send the request. </td></tr>
+    <tr><td class="paramname">true</td><td>request is under sending. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section post"><dt>Postcondition</dt><dd>Through ruscb: std::any&lt;long&gt;* points a value or 0 if the field is text or there is an error. </dd></dl>
 <dl class="section note"><dt>Note</dt><dd>NAN, INFINITY, and -INFINITY are valid results. </dd></dl>
 
 </div>
@@ -1384,7 +1484,14 @@ Public Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>If false - client is busy, can't connect. (Through ruscb: std::any&lt;long&gt;* points a value or 0 if the field is text or there is an error.) </dd></dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">false</td><td><a class="el" href="class_async_t_s.html">AsyncTS</a> client is busy. Couldn't send the request. </td></tr>
+    <tr><td class="paramname">true</td><td>request is under sending. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section post"><dt>Postcondition</dt><dd>Through ruscb: std::any&lt;long&gt;* points a value or 0 if the field is text or there is an error. </dd></dl>
 <dl class="section note"><dt>Note</dt><dd>NAN, INFINITY, and -INFINITY are valid results. </dd></dl>
 
 </div>
@@ -1413,7 +1520,14 @@ Public Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>If false - client is busy, can't connect. (Through ruscb:200 status code + std::any&lt;AsyncTS&gt;* if successful.) </dd></dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">false</td><td><a class="el" href="class_async_t_s.html">AsyncTS</a> client is busy. Couldn't send the request. </td></tr>
+    <tr><td class="paramname">true</td><td>request is under sending. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section post"><dt>Postcondition</dt><dd>Through ruscb:200 status code + std::any&lt;AsyncTS&gt;* if successful. </dd></dl>
 
 </div>
 </div>
@@ -1452,7 +1566,14 @@ Public Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>If false - client is busy, can't connect. (Through ruscb:200 status code + std::any&lt;AsyncTS&gt;* if successful.) </dd></dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">false</td><td><a class="el" href="class_async_t_s.html">AsyncTS</a> client is busy. Couldn't send the request. </td></tr>
+    <tr><td class="paramname">true</td><td>request is under sending. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section post"><dt>Postcondition</dt><dd>Through user's callback function :200 status code + std::any&lt;AsyncTS&gt;* if successful. </dd></dl>
 
 </div>
 </div>
@@ -1497,7 +1618,14 @@ Public Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>If false - client is busy, can't connect. (Through ruscb:200 status code +std::any&lt;AsyncTS&gt;* if successful.) </dd></dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">false</td><td><a class="el" href="class_async_t_s.html">AsyncTS</a> client is busy. Couldn't send the request. </td></tr>
+    <tr><td class="paramname">true</td><td>request is under sending. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section post"><dt>Postcondition</dt><dd>Through ruscb:200 status code +std::any&lt;AsyncTS&gt;* if successful. </dd></dl>
 
 </div>
 </div>
@@ -1535,7 +1663,14 @@ Public Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>If false - client is busy, can't connect. (Through ruscb:200 status code + std::any&lt;AsyncTS&gt;* if successful.) </dd></dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">false</td><td><a class="el" href="class_async_t_s.html">AsyncTS</a> client is busy. Couldn't send the request. </td></tr>
+    <tr><td class="paramname">true</td><td>request is under sending. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section post"><dt>Postcondition</dt><dd>Through ruscb:200 status code + std::any&lt;AsyncTS&gt;* if successful. </dd></dl>
 
 </div>
 </div>
@@ -1582,7 +1717,13 @@ Public Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>If false , client is busy or can't connect. </dd></dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">false</td><td><a class="el" href="class_async_t_s.html">AsyncTS</a> client is busy. Couldn't send the request. </td></tr>
+    <tr><td class="paramname">true</td><td>request is under sending. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -1664,7 +1805,13 @@ Public Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>If false - client is busy, can't connect. </dd></dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">false</td><td><a class="el" href="class_async_t_s.html">AsyncTS</a> client is busy. Couldn't send the request. </td></tr>
+    <tr><td class="paramname">true</td><td>request is under sending. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -1704,7 +1851,13 @@ Public Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>If false - client is busy, can't connect. </dd></dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">false</td><td><a class="el" href="class_async_t_s.html">AsyncTS</a> client is busy. Couldn't send the request. </td></tr>
+    <tr><td class="paramname">true</td><td>request is under sending. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -1750,7 +1903,13 @@ Public Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>If false - client is busy, can't connect. </dd></dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">false</td><td><a class="el" href="class_async_t_s.html">AsyncTS</a> client is busy. Couldn't send the request. </td></tr>
+    <tr><td class="paramname">true</td><td>request is under sending. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -1789,7 +1948,13 @@ Public Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>If false - client is busy, can't connect. </dd></dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">false</td><td><a class="el" href="class_async_t_s.html">AsyncTS</a> client is busy. Couldn't send the request. </td></tr>
+    <tr><td class="paramname">true</td><td>request is under sending. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -1820,7 +1985,8 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Read the latest string from a public ThingSpeak channel. </p>
-<dl class="section pre"><dt>Precondition</dt><dd>First call <a class="el" href="class_async_t_s.html#ac1a7c99f999052e49aa4db87bbf58a78" title="Set the callback function to process the server reponse. The user&#39;s function is called after these &#39;r...">onReadServerResponseUserCB()</a>, to set the user's callback function.</dd></dl>
+<dl class="section pre"><dt>Precondition</dt><dd>First call <a class="el" href="class_async_t_s.html#ac1a7c99f999052e49aa4db87bbf58a78" title="Set the callback function to process the server reponse. The user&#39;s function is called after these &#39;r...">onReadServerResponseUserCB()</a>, to set the user's callback function. </dd></dl>
+<dl class="section post"><dt>Postcondition</dt><dd>Through user' callback: std::any&lt;string&gt;* need process. </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">channelNumber</td><td>Channel number </td></tr>
@@ -1830,7 +1996,8 @@ Public Attributes</h2></td></tr>
 </dl>
 <dl class="retval"><dt>Return values</dt><dd>
   <table class="retval">
-    <tr><td class="paramname">false</td><td>- client is busy, can't connect.(Through ruscb: std::any&lt;string&gt;* points to a String) </td></tr>
+    <tr><td class="paramname">false</td><td><a class="el" href="class_async_t_s.html">AsyncTS</a> client is busy. Couldn't send the request. </td></tr>
+    <tr><td class="paramname">true</td><td>request is under sending. </td></tr>
   </table>
   </dd>
 </dl>
@@ -1870,7 +2037,8 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Read the latest string from a private ThingSpeak channel. </p>
-<dl class="section pre"><dt>Precondition</dt><dd>First call <a class="el" href="class_async_t_s.html#ac1a7c99f999052e49aa4db87bbf58a78" title="Set the callback function to process the server reponse. The user&#39;s function is called after these &#39;r...">onReadServerResponseUserCB()</a>.</dd></dl>
+<dl class="section pre"><dt>Precondition</dt><dd>First call <a class="el" href="class_async_t_s.html#ac1a7c99f999052e49aa4db87bbf58a78" title="Set the callback function to process the server reponse. The user&#39;s function is called after these &#39;r...">onReadServerResponseUserCB()</a>. </dd></dl>
+<dl class="section post"><dt>Postcondition</dt><dd>Through user' callback: std::any&lt;string&gt;* need process. </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">channelNumber</td><td>Channel number </td></tr>
@@ -1881,7 +2049,8 @@ Public Attributes</h2></td></tr>
 </dl>
 <dl class="retval"><dt>Return values</dt><dd>
   <table class="retval">
-    <tr><td class="paramname">false</td><td>- client is busy, can't connect. (Through ruscb: std::any&lt;string&gt;* points to a String) </td></tr>
+    <tr><td class="paramname">false</td><td><a class="el" href="class_async_t_s.html">AsyncTS</a> client is busy. Couldn't send the request. </td></tr>
+    <tr><td class="paramname">true</td><td>request is under sending. </td></tr>
   </table>
   </dd>
 </dl>
@@ -1930,6 +2099,12 @@ Public Attributes</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">channelNumber</td><td>Channel number </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section post"><dt>Postcondition</dt><dd>Through user' callback: std::any&lt;string&gt;* need process. </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
     <tr><td class="paramname">field</td><td>Field number (1-8) within the channel to read from. </td></tr>
     <tr><td class="paramname">readAPIKey</td><td>Read API key associated with the channel. <em>If you share code with others, do <em>not</em> share this key</em> </td></tr>
     <tr><td class="paramname">ruscb</td><td>User's callback function to process the server response. </td></tr>
@@ -1938,7 +2113,8 @@ Public Attributes</h2></td></tr>
 </dl>
 <dl class="retval"><dt>Return values</dt><dd>
   <table class="retval">
-    <tr><td class="paramname">false</td><td>- client is busy, can't connect.(Through ruscb: std::any&lt;string&gt;* points to a String) </td></tr>
+    <tr><td class="paramname">false</td><td><a class="el" href="class_async_t_s.html">AsyncTS</a> client is busy. Couldn't send the request. </td></tr>
+    <tr><td class="paramname">true</td><td>request is under sending. </td></tr>
   </table>
   </dd>
 </dl>
@@ -1986,9 +2162,11 @@ Public Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section post"><dt>Postcondition</dt><dd>Through user' callback: std::any&lt;string&gt;* need process. </dd></dl>
 <dl class="retval"><dt>Return values</dt><dd>
   <table class="retval">
-    <tr><td class="paramname">false</td><td>- client is busy, can't connect.(Through ruscb: std::any&lt;string&gt;* points to a String) </td></tr>
+    <tr><td class="paramname">false</td><td><a class="el" href="class_async_t_s.html">AsyncTS</a> client is busy. Couldn't send the request. </td></tr>
+    <tr><td class="paramname">true</td><td>request is under sending. </td></tr>
   </table>
   </dd>
 </dl>
@@ -2497,7 +2675,13 @@ Public Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>if false - client is busy, can't connect. </dd></dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">false</td><td><a class="el" href="class_async_t_s.html">AsyncTS</a> client is busy. Couldn't send the request. </td></tr>
+    <tr><td class="paramname">true</td><td>request is under sending. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -2556,7 +2740,13 @@ Public Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>if false - client is busy, can't connect. </dd></dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">false</td><td><a class="el" href="class_async_t_s.html">AsyncTS</a> client is busy. Couldn't send the request. </td></tr>
+    <tr><td class="paramname">true</td><td>request is under sending. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -2609,7 +2799,13 @@ Public Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>if false - client is busy, can't connect. </dd></dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">false</td><td><a class="el" href="class_async_t_s.html">AsyncTS</a> client is busy. Couldn't send the request. </td></tr>
+    <tr><td class="paramname">true</td><td>request is under sending. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -2668,7 +2864,13 @@ Public Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>if false - client is busy, can't connect. </dd></dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">false</td><td><a class="el" href="class_async_t_s.html">AsyncTS</a> client is busy. Couldn't send the request. </td></tr>
+    <tr><td class="paramname">true</td><td>request is under sending. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -2721,7 +2923,13 @@ Public Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>if false - client is busy, can't connect. </dd></dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">false</td><td><a class="el" href="class_async_t_s.html">AsyncTS</a> client is busy. Couldn't send the request. </td></tr>
+    <tr><td class="paramname">true</td><td>request is under sending. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -2780,7 +2988,13 @@ Public Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>if false - client is busy, can't connect. </dd></dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">false</td><td><a class="el" href="class_async_t_s.html">AsyncTS</a> client is busy. Couldn't send the request. </td></tr>
+    <tr><td class="paramname">true</td><td>request is under sending. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -2833,7 +3047,13 @@ Public Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>if false - client is busy, can't connect. </dd></dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">false</td><td><a class="el" href="class_async_t_s.html">AsyncTS</a> client is busy. Couldn't send the request. </td></tr>
+    <tr><td class="paramname">true</td><td>request is under sending. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -2892,7 +3112,13 @@ Public Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>if false - client is busy, can't connect. </dd></dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">false</td><td><a class="el" href="class_async_t_s.html">AsyncTS</a> client is busy. Couldn't send the request. </td></tr>
+    <tr><td class="paramname">true</td><td>request is under sending. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -2931,8 +3157,13 @@ Public Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>if false - client is busy, can't connect. <br  />
- </dd></dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">false</td><td><a class="el" href="class_async_t_s.html">AsyncTS</a> client is busy. Couldn't send the request. </td></tr>
+    <tr><td class="paramname">true</td><td>request is under sending. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -2978,7 +3209,13 @@ Public Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>False if client is busy, can't connect. </dd></dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">false</td><td><a class="el" href="class_async_t_s.html">AsyncTS</a> client is busy. Couldn't send the request. </td></tr>
+    <tr><td class="paramname">true</td><td>request is under sending. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -3021,6 +3258,13 @@ Public Attributes</h2></td></tr>
     <tr><td class="paramname">channelNumber</td><td>Thingspeak channel number </td></tr>
     <tr><td class="paramname">postMessage</td><td>Raw URL to write to ThingSpeak as a string. See the documentation at <a href="https://thingspeak.com/docs/channels#update_feed">https://thingspeak.com/docs/channels#update_feed</a>. </td></tr>
     <tr><td class="paramname">writeAPIKey</td><td>WriteAPIkey for your channel <em>If you share code with others, do <em>not</em> share this key</em> </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">false</td><td><a class="el" href="class_async_t_s.html">AsyncTS</a> client is busy. Couldn't send the request. </td></tr>
+    <tr><td class="paramname">true</td><td>request is under sending. </td></tr>
   </table>
   </dd>
 </dl>
@@ -3072,6 +3316,13 @@ Public Attributes</h2></td></tr>
     <tr><td class="paramname">postMessage</td><td>Raw URL to write to ThingSpeak as a string. See the documentation at <a href="https://thingspeak.com/docs/channels#update_feed">https://thingspeak.com/docs/channels#update_feed</a>. </td></tr>
     <tr><td class="paramname">writeAPIKey</td><td>WriteAPIkey for your channel <em>If you share code with others, do <em>not</em> share this key</em> </td></tr>
     <tr><td class="paramname">wrucb</td><td>User's callback function to process the answare of server. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">false</td><td><a class="el" href="class_async_t_s.html">AsyncTS</a> client is busy. Couldn't send the request. </td></tr>
+    <tr><td class="paramname">true</td><td>request is under sending. </td></tr>
   </table>
   </dd>
 </dl>

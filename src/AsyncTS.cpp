@@ -468,6 +468,8 @@ void AsyncTS::setTimeout(int milliseconds)
  * @param channelNumber Thingspeak channel number
  * @param postMessage   Raw URL to write to ThingSpeak as a string.  See the documentation at https://thingspeak.com/docs/channels#update_feed.
  * @param writeAPIKey   WriteAPIkey for your channel  *If you share code with others, do _not_ share this key*
+ * @retval false: AsyncTS client is busy. Couldn't send the request.
+ * @retval true: request is under sending.
 */
 bool AsyncTS::writeRaw(unsigned long channelNumber, String postMessage, const char *writeAPIKey)
 {
@@ -509,6 +511,8 @@ bool AsyncTS::writeRaw(unsigned long channelNumber, String postMessage, const ch
  * @param postMessage   Raw URL to write to ThingSpeak as a string.  See the documentation at https://thingspeak.com/docs/channels#update_feed.
  * @param writeAPIKey   WriteAPIkey for your channel  *If you share code with others, do _not_ share this key*
  * @param wrucb         User's callback function to process the answare of server.
+ * @retval false: AsyncTS client is busy. Couldn't send the request.
+ * @retval true: request is under sending.
 */
 bool AsyncTS::writeRaw(unsigned long channelNumber, String postMessage, const char *writeAPIKey, writeResponseUserCB wrucb)
 {
@@ -516,6 +520,16 @@ bool AsyncTS::writeRaw(unsigned long channelNumber, String postMessage, const ch
     return writeRaw(channelNumber,postMessage,writeAPIKey);
 }
 
+/**
+  * @brief Read a raw response from a private ThingSpeak channel
+  * @pre Call onReadServerResponseUserCB() before.
+  * @post User's callback need process std::any<String>*.
+  * @param channelNumber Channnel number
+  * @param suffixURL Raw URL to write to ThingSpeak as a String.  See the documentation at https://thingspeak.com/docs/channels#get_feed
+  * @param readAPIKey Read API key associated with the channel.  *If you share code with others, do _not_ share this key*
+  * @retval false: AsyncTS client is busy. Couldn't send the request.
+  * @retval true: request is under sending.
+ */
 bool AsyncTS::_readRaw(unsigned long channelNumber, String suffixURL, const char *readAPIKey)
 {
     DEBUG_ATS("ats::readRaw (channelNumber: %lu  readAPIkey: %s suffixURL: \"%s\r\n", channelNumber, readAPIKey, suffixURL.c_str());
@@ -555,7 +569,8 @@ bool AsyncTS::_readRaw(unsigned long channelNumber, String suffixURL, const char
   * @param channelNumber Channnel number
   * @param suffixURL Raw URL to write to ThingSpeak as a String.  See the documentation at https://thingspeak.com/docs/channels#get_feed
   * @param readAPIKey Read API key associated with the channel.  *If you share code with others, do _not_ share this key*
-  * @return If false , client is busy or can't connect.
+  * @retval false: AsyncTS client is busy. Couldn't send the request.
+  * @retval true: request is under sending.
  */
 bool AsyncTS::readRaw(unsigned long channelNumber, String suffixURL, const char * readAPIKey)
 {
@@ -596,11 +611,12 @@ void AsyncTS::_readCreatedAtCB()
  * @brief Read the created-at timestamp associated with the latest update to a private ThingSpeak channel
  * 
  * @pre Call onReadServerResponseUserCB() before.
+ * @post User's callback need process std::any<String>*.
  * 
  * @param channelNumber Channel number
  * @param readAPIKey Read API key associated with the channel.  *If you share code with others, do _not_ share this key*
- * @return if false - client is busy, can't connect.
- * @post User's callback need process std::any<String>*.
+ * @retval false: AsyncTS client is busy. Couldn't send the request.
+ * @retval true: request is under sending.
 */
 bool AsyncTS::readCreatedAt(unsigned long channelNumber, const char *readAPIKey)
 {
@@ -616,7 +632,8 @@ bool AsyncTS::readCreatedAt(unsigned long channelNumber, const char *readAPIKey)
  * @param channelNumber Channel number
  * @param readAPIKey Read API key associated with the channel.  *If you share code with others, do _not_ share this key*
  * @param ruscb User's callback function to process the server response.
- * @return if false - client is busy, can't connect.
+ * @retval false: AsyncTS client is busy. Couldn't send the request.
+ * @retval true: request is under sending.
  * @post User's callback need process std::any<String>*.
 */
 bool AsyncTS::readCreatedAt(unsigned long channelNumber, const char * readAPIKey, readResponseUserCB ruscb)
@@ -632,7 +649,8 @@ bool AsyncTS::readCreatedAt(unsigned long channelNumber, const char * readAPIKey
  * @pre Call onReadServerResponseUserCB() before.
  * 
  * @param channelNumber Channel number
- * @return if false - client is busy, can't connect.
+ * @retval false: AsyncTS client is busy. Couldn't send the request.
+ * @retval true: request is under sending.
  * @post User's callback need process std::any<String>*.
 */
 bool AsyncTS::readCreatedAt(unsigned long channelNumber)
@@ -645,7 +663,8 @@ bool AsyncTS::readCreatedAt(unsigned long channelNumber)
  * 
  * @param channelNumber Channel number
  * @param ruscb User's callback function to process the server response.
- * @return if false - client is busy, can't connect.
+ * @retval false: AsyncTS client is busy. Couldn't send the request.
+ * @retval true: request is under sending.
  * @post User's callback need process std::any<String>*.
 */
 bool AsyncTS::readCreatedAt(unsigned long channelNumber, readResponseUserCB ruscb)
@@ -690,7 +709,8 @@ void AsyncTS::setDebug(bool debug)
  * @param   field           Field number (1-8) within the channel to write to.
  * @param   value           String value.
  * @param   writeAPIKey     Write API key associated with the channel.  *If you share code with others, do _not_ share this key*
- * @return  if false - client is busy, can't connect.
+ * @retval false: AsyncTS client is busy. Couldn't send the request.
+ * @retval true: request is under sending.
 */
 bool AsyncTS::writeField(unsigned long channelNumber, unsigned int field, String value, const char *writeAPIKey)
 {
@@ -741,7 +761,8 @@ bool AsyncTS::writeField(unsigned long channelNumber, unsigned int field, String
  * @param   value           String value.
  * @param   writeAPIKey     Write API key associated with the channel.  *If you share code with others, do _not_ share this key*
  * @param   wrucb           User's callback function to process the server response.
- * @return  if false - client is busy, can't connect.
+ * @retval false: AsyncTS client is busy. Couldn't send the request.
+ * @retval true: request is under sending.
 */
 bool AsyncTS::writeField(unsigned long channelNumber, unsigned int field, String value, const char * writeAPIKey, writeResponseUserCB wrucb)
 {
@@ -758,7 +779,8 @@ bool AsyncTS::writeField(unsigned long channelNumber, unsigned int field, String
  * @param   field           Field number (1-8) within the channel to write to.
  * @param   value           Integer value (from -32,768 to 32,767) to write.
  * @param   writeAPIKey     Write API key associated with the channel.  *If you share code with others, do _not_ share this key*
- * @return  if false - client is busy, can't connect.
+ * @retval false: AsyncTS client is busy. Couldn't send the request.
+ * @retval true: request is under sending.
 */
 bool AsyncTS::writeField(unsigned long channelNumber, unsigned int field, int value, const char *writeAPIKey)
 {
@@ -774,7 +796,8 @@ bool AsyncTS::writeField(unsigned long channelNumber, unsigned int field, int va
  * @param   value           Integer value (from -32,768 to 32,767) to write.
  * @param   writeAPIKey     Write API key associated with the channel.  *If you share code with others, do _not_ share this key*
  * @param   wrucb           User's callback function to process the server response.
- * @return  if false - client is busy, can't connect.
+ * @retval false: AsyncTS client is busy. Couldn't send the request.
+ * @retval true: request is under sending.
 */
 bool AsyncTS::writeField(unsigned long channelNumber, unsigned int field, int value, const char * writeAPIKey, writeResponseUserCB wrucb)
 {
@@ -791,7 +814,8 @@ bool AsyncTS::writeField(unsigned long channelNumber, unsigned int field, int va
  * @param   field           Field number (1-8) within the channel to write to.
  * @param   value           Long value (from -2,147,483,648 to 2,147,483,647) to write.
  * @param   writeAPIKey     Write API key associated with the channel.  *If you share code with others, do _not_ share this key*
- * @return  if false - client is busy, can't connect.
+ * @retval false: AsyncTS client is busy. Couldn't send the request.
+ * @retval true: request is under sending.
 */
 bool AsyncTS::writeField(unsigned long channelNumber, unsigned int field, long value, const char *writeAPIKey)
 {
@@ -807,7 +831,8 @@ bool AsyncTS::writeField(unsigned long channelNumber, unsigned int field, long v
  * @param   value           Long value (from -2,147,483,648 to 2,147,483,647) to write.
  * @param   writeAPIKey     Write API key associated with the channel.  *If you share code with others, do _not_ share this key*
  * @param   wrucb           User's callback function to process the server response.
- * @return  if false - client is busy, can't connect.
+ * @retval false: AsyncTS client is busy. Couldn't send the request.
+ * @retval true: request is under sending.
 */
 bool AsyncTS::writeField(unsigned long channelNumber, unsigned int field, long value, const char * writeAPIKey, writeResponseUserCB wrucb)
 {
@@ -824,7 +849,8 @@ bool AsyncTS::writeField(unsigned long channelNumber, unsigned int field, long v
  * @param   field           Field number (1-8) within the channel to write to.
  * @param   value           Floating point value (from -999999000000 to 999999000000) to write.  If you need more accuracy, or a wider range, you should format the number using <tt>dtostrf</tt> and writeField().
  * @param   writeAPIKey     Write API key associated with the channel.  *If you share code with others, do _not_ share this key*
- * @return  if false - client is busy, can't connect.
+ * @retval false: AsyncTS client is busy. Couldn't send the request.
+ * @retval true: request is under sending.
 */
 bool AsyncTS::writeField(unsigned long channelNumber, unsigned int field, float value, const char *writeAPIKey)
 {
@@ -847,7 +873,8 @@ bool AsyncTS::writeField(unsigned long channelNumber, unsigned int field, float 
  * @param   value           Floating point value (from -999999000000 to 999999000000) to write.  If you need more accuracy, or a wider range, you should format the number using <tt>dtostrf</tt> and writeField().
  * @param   writeAPIKey     Write API key associated with the channel.  *If you share code with others, do _not_ share this key*
  * @param   wrucb           User's callback function to process the server response.
- * @return  if false - client is busy, can't connect.
+ * @retval false: AsyncTS client is busy. Couldn't send the request.
+ * @retval true: request is under sending.
 */
 bool AsyncTS::writeField(unsigned long channelNumber, unsigned int field, float value, const char * writeAPIKey, writeResponseUserCB wrucb)
 {
@@ -863,7 +890,8 @@ bool AsyncTS::writeField(unsigned long channelNumber, unsigned int field, float 
  * 
  * @param    channelNumber Channel number
  * @param    writeAPIKey Write API key associated with the channel.  *If you share code with others, do _not_ share this key*
- * @return   if false - client is busy, can't connect.  
+ * @retval false: AsyncTS client is busy. Couldn't send the request.
+ * @retval true: request is under sending. 
 */
 bool AsyncTS::writeFields(unsigned long channelNumber, const char *writeAPIKey)
 {
@@ -1005,7 +1033,8 @@ bool AsyncTS::writeFields(unsigned long channelNumber, const char *writeAPIKey)
   *@param channelNumber Channel number
   *@param writeAPIKey   Write API key associated with the channel.  *If you share code with others, do _not_ share this key*
   *@param wrucb         User's callback function to process the server response.
-  *@return   False  if client is busy, can't connect.
+ * @retval false: AsyncTS client is busy. Couldn't send the request.
+ * @retval true: request is under sending.
 */
 bool AsyncTS::writeFields(unsigned long channelNumber, const char * writeAPIKey, writeResponseUserCB wrucb)
 {
@@ -1026,11 +1055,12 @@ void AsyncTS::_readStringFieldCB()
  * @brief Read the latest string from a private ThingSpeak channel.
  * 
  * @pre First call  onReadServerResponseUserCB().
- * 
+ * @post Through user' callback: std::any<string>* need process.
  * @param channelNumber Channel number
  * @param field Field number (1-8) within the channel to read from.
  * @param readAPIKey Read API key associated with the channel.  *If you share code with others, do _not_ share this key*
- * @retval false - client is busy, can't connect. (Through ruscb: std::any<string>* points to a String)
+ * @retval false: AsyncTS client is busy. Couldn't send the request.
+ * @retval true: request is under sending.
 */
 bool AsyncTS::readStringField(unsigned long channelNumber, unsigned int field, const char *readAPIKey)
 {
@@ -1042,10 +1072,12 @@ bool AsyncTS::readStringField(unsigned long channelNumber, unsigned int field, c
 /**
  * @brief Read the latest string from a private ThingSpeak channel.
  * @param channelNumber Channel number
+ * @post Through user' callback: std::any<string>* need process.
  * @param field Field number (1-8) within the channel to read from.
  * @param readAPIKey Read API key associated with the channel.  *If you share code with others, do _not_ share this key*
  * @param ruscb User's callback function to process the server response.
- * @retval false - client is busy, can't connect.(Through ruscb: std::any<string>* points to a String)
+ * @retval false: AsyncTS client is busy. Couldn't send the request.
+ * @retval true: request is under sending.
 */
 bool AsyncTS::readStringField(unsigned long channelNumber, unsigned int field, const char * readAPIKey, readResponseUserCB ruscb)
 {
@@ -1057,10 +1089,11 @@ bool AsyncTS::readStringField(unsigned long channelNumber, unsigned int field, c
  * @brief Read the latest string from a public ThingSpeak channel.
  * 
  * @pre First call  onReadServerResponseUserCB(), to set the user's callback function.
- * 
+ * @post Through user' callback: std::any<string>* need process.
  * @param channelNumber Channel number
  * @param field Field number (1-8) within the channel to read from.
- * @retval false - client is busy, can't connect.(Through ruscb: std::any<string>* points to a String)
+ * @retval false: AsyncTS client is busy. Couldn't send the request.
+ * @retval true: request is under sending.
 */
 bool AsyncTS::readStringField(unsigned long channelNumber, unsigned int field)
 {
@@ -1073,7 +1106,9 @@ bool AsyncTS::readStringField(unsigned long channelNumber, unsigned int field)
  * @param channelNumber Channel number
  * @param field Field number (1-8) within the channel to read from.
  * @param ruscb User's callback function to process the server response.
- * @retval false - client is busy, can't connect.(Through ruscb: std::any<string>* points to a String)
+ * @post Through user' callback: std::any<string>* need process.
+ * @retval false: AsyncTS client is busy. Couldn't send the request.
+ * @retval true: request is under sending.
 */
 bool AsyncTS::readStringField(unsigned long channelNumber, unsigned int field , readResponseUserCB ruscb)
 {
@@ -1092,11 +1127,13 @@ void AsyncTS::_readFloatFieldCB()
 /**
  * @brief Read the latest floating point value from a private ThingSpeak channel
  * @pre First call  onReadServerResponseUserCB(), to set the user's callback function.
+ * @post Through user' callback: std::any<float>* points a value or 0 if the field is
+ * text or there is an error.
  * @param channelNumber Channel number
  * @param field Field number (1-8) within the channel to read from.
  * @param readAPIKey Read API key associated with the channel.  *If you share code with others, do _not_ share this key*
- * @return If false - client is busy, can't connect.(Through ruscb: std::any<float>* points a value or 0 if the field is
- * text or there is an error.)
+ * @retval false: AsyncTS client is busy. Couldn't send the request.
+ * @retval true: request is under sending.
 */
 bool AsyncTS::readFloatField(unsigned long channelNumber, unsigned int field, const char *readAPIKey)
 {
@@ -1110,9 +1147,10 @@ bool AsyncTS::readFloatField(unsigned long channelNumber, unsigned int field, co
  * @param field Field number (1-8) within the channel to read from.
  * @param readAPIKey Read API key associated with the channel.  *If you share code with others, do _not_ share this key*
  * @param ruscb User's callback function to process the server response.
- * @return If false - client is busy, can't connect.(Through ruscb: std::any<float>* points a value or 0 if the field is
- * text or there is an error.) 
- * @note  NAN, INFINITY, and -INFINITY are valid results.
+ * @post Through user' callback: std::any<float>* points a value or 0 if the field is
+ * text or there is an error.
+ * @retval false: AsyncTS client is busy. Couldn't send the request.
+ * @retval true: request is under sending.
 */
 bool AsyncTS::readFloatField(unsigned long channelNumber, unsigned int field, const char * readAPIKey, readResponseUserCB ruscb)
 {
@@ -1122,10 +1160,12 @@ bool AsyncTS::readFloatField(unsigned long channelNumber, unsigned int field, co
 /**
  * @brief Read the latest floating point value from a public ThingSpeak channel
  * @pre First call  onReadServerResponseUserCB(), to set the user's callback function.
+ * @post Through user' callback: std::any<float>* points a value or 0 if the field is
+ * text or there is an error.
  * @param channelNumber Channel number
  * @param field Field number (1-8) within the channel to read from.
- * @return If false - client is busy, can't connect.(Through ruscb: std::any<float>* points a value or 0 if the field is
- * text or there is an error.)
+ * @retval false: AsyncTS client is busy. Couldn't send the request.
+ * @retval true: request is under sending.
  * @note  NAN, INFINITY, and -INFINITY are valid results.
 */
 bool AsyncTS::readFloatField(unsigned long channelNumber, unsigned int field)
@@ -1134,11 +1174,13 @@ bool AsyncTS::readFloatField(unsigned long channelNumber, unsigned int field)
 }
 /**
  * @brief Read the latest floating point value from a public ThingSpeak channel
+ * @post  Through ruscb: std::any<float>* points a value or 0 if the field is
+ * text or there is an error.
  * @param channelNumber Channel number
  * @param field Field number (1-8) within the channel to read from.
  * @param ruscb User's callback function to process the server response.
- * @return If false - client is busy, can't connect.(Through ruscb: std::any<float>* points a value or 0 if the field is
- * text or there is an error.) 
+ * @retval false: AsyncTS client is busy. Couldn't send the request.
+ * @retval true: request is under sending.
  * @note  NAN, INFINITY, and -INFINITY are valid results.
 */
 bool AsyncTS::readFloatField(unsigned long channelNumber, unsigned int field, readResponseUserCB ruscb)
@@ -1162,8 +1204,9 @@ void AsyncTS::_readLongFieldCB()
  * @param channelNumber Channel number
  * @param field Field number (1-8) within the channel to read from.
  * @param readAPIKey Read API key associated with the channel.  *If you share code with others, do _not_ share this key*
- * @return If false - client is busy, can't connect.(Through ruscb: std::any<long>* points a value or 0 if the field is
- * text or there is an error.) 
+ * @retval false: AsyncTS client is busy. Couldn't send the request.
+ * @retval true: request is under sending.
+ * @post Through user's callback function: std::any<long>* points a value or 0 if the field is text or there is an error.
  * @note  NAN, INFINITY, and -INFINITY are valid results.
 */
 bool AsyncTS::readLongField(unsigned long channelNumber, unsigned int field, const char *readAPIKey)
@@ -1179,8 +1222,9 @@ bool AsyncTS::readLongField(unsigned long channelNumber, unsigned int field, con
  * @param field Field number (1-8) within the channel to read from.
  * @param readAPIKey Read API key associated with the channel.  *If you share code with others, do _not_ share this key*
  * @param ruscb User's callback function to process the server response.
- * @return If false - client is busy, can't connect.(Through ruscb: std::any<long>* points a value or 0 if the field is
- * text or there is an error.) 
+ * @retval false: AsyncTS client is busy. Couldn't send the request.
+ * @retval true: request is under sending.
+ * @post  Through ruscb: std::any<long>* points a value or 0 if the field is text or there is an error.
  * @note  NAN, INFINITY, and -INFINITY are valid results.
 */
 bool AsyncTS::readLongField(unsigned long channelNumber, unsigned int  field, const char * readAPIKey, readResponseUserCB ruscb)
@@ -1194,8 +1238,9 @@ bool AsyncTS::readLongField(unsigned long channelNumber, unsigned int  field, co
  * @pre First call  onReadServerResponseUserCB(), to set the user's callback function.
  * @param channelNumber Channel number
  * @param field Field number (1-8) within the channel to read from.
- * @return If false - client is busy, can't connect. (Through ruscb: std::any<long>* points a value or 0 if the field is
- * text or there is an error.)
+ * @retval false: AsyncTS client is busy. Couldn't send the request.
+ * @retval true: request is under sending.
+ * @post  Through user's callback function: std::any<long>* points a value or 0 if the field is text or there is an error.
  * @note  NAN, INFINITY, and -INFINITY are valid results.
 */
 bool AsyncTS::readLongField(unsigned long channelNumber, unsigned int field)
@@ -1208,8 +1253,9 @@ bool AsyncTS::readLongField(unsigned long channelNumber, unsigned int field)
  * @param channelNumber Channel number
  * @param field Field number (1-8) within the channel to read from.
  * @param ruscb User's callback function to process the server response.
- * @return If false - client is busy, can't connect. (Through ruscb: std::any<long>* points a value or 0 if the field is
- * text or there is an error.)
+ * @retval false: AsyncTS client is busy. Couldn't send the request.
+ * @retval true: request is under sending.
+ * @post Through ruscb: std::any<long>* points a value or 0 if the field is text or there is an error.
  * @note  NAN, INFINITY, and -INFINITY are valid results.
 */
 bool AsyncTS::readLongField(unsigned long channelNumber, unsigned int field, readResponseUserCB ruscb)
@@ -1233,8 +1279,9 @@ void AsyncTS::_readIntFieldCB()
  * @param channelNumber Channel number
  * @param field   Field number (1-8) within the channel to read from.
  * @param readAPIKey  Read API key associated with the channel.  *If you share code with others, do _not_ share this key*
- * @return If false - client is busy, can't connect. (Through ruscb: std::any<int>* points a value or 0 if the field is
- * text or there is an error.)
+ * @retval false: AsyncTS client is busy. Couldn't send the request.
+ * @retval true: request is under sending.
+ * @post  Through user's callback function: std::any<int>* points a value or 0 if the field is text or there is an error.
  * @note  NAN, INFINITY, and -INFINITY are valid results.
 */
 bool AsyncTS::readIntField(unsigned long channelNumber, unsigned int field, const char *readAPIKey)
@@ -1249,8 +1296,9 @@ bool AsyncTS::readIntField(unsigned long channelNumber, unsigned int field, cons
  * @param field  Field number (1-8) within the channel to read from.
  * @param readAPIKey   Read API key associated with the channel.  *If you share code with others, do _not_ share this key*
  * @param ruscb User's callback function to process the server response.
- * @return If false - client is busy, can't connect. (Through ruscb: std::any<int>* points a value or 0 if the field
- * is text or there is an error.)
+ * @retval false: AsyncTS client is busy. Couldn't send the request.
+ * @retval true: request is under sending.
+ * @post Through ruscb: std::any<int>* points a value or 0 if the field is text or there is an error.
  * @note  NAN, INFINITY, and -INFINITY are valid results.
 */
 bool AsyncTS::readIntField(unsigned long channelNumber, unsigned int field, const char * readAPIKey, readResponseUserCB ruscb)
@@ -1264,8 +1312,9 @@ bool AsyncTS::readIntField(unsigned long channelNumber, unsigned int field, cons
  * @pre First call  onReadServerResponseUserCB(), to set the user's callback function.
  * @param channelNumber Channel number
  * @param field  Field number (1-8) within the channel to read from.
- * @return If false - client is busy, can't connect. (Through ruscb: std::any<int>* points a value or 0 if the field is
- * text or there is an error.)
+ * @retval false: AsyncTS client is busy. Couldn't send the request.
+ * @retval true: request is under sending.
+ * @post Through  user's callback function: std::any<int>* points a value or 0 if the field is text or there is an error.
  * @note  NAN, INFINITY, and -INFINITY are valid results.
 */
 bool AsyncTS::readIntField(unsigned long channelNumber, unsigned int field)
@@ -1278,8 +1327,9 @@ bool AsyncTS::readIntField(unsigned long channelNumber, unsigned int field)
  * @param channelNumber  Channel number
  * @param field  Field number (1-8) within the channel to read from.
  * @param ruscb User's callback function to process the server response.
- * @return If false - client is busy, can't connect. (Through ruscb: std::any<int>* points a value or 0 if the field is text
- * or there is an error.)
+ * @retval false: AsyncTS client is busy. Couldn't send the request.
+ * @retval true: request is under sending.
+ * @post Through ruscb: std::any<int>* points a value or 0 if the field is text or there is an error.
  * @note  NAN, INFINITY, and -INFINITY are valid results.
 */
 bool AsyncTS::readIntField(unsigned long channelNumber, unsigned int field, readResponseUserCB ruscb)
@@ -1319,7 +1369,9 @@ void AsyncTS::_readMultipleFieldsCB()
  * @pre First call  onReadServerResponseUserCB(), to set the user's callback function.
  * @param channelNumber Channel number
  * @param readAPIKey Read API key associated with the channel. *If you share code with others, do _not_ share this key*
- * @returns If false - client is busy, can't connect. (Through ruscb:200 status code + std::any<AsyncTS>* if successful.)
+ * @retval false: AsyncTS client is busy. Couldn't send the request.
+ * @retval true: request is under sending.
+ * @post Through  user's callback function :200 status code + std::any<AsyncTS>* if successful.
 */
 bool AsyncTS::readMultipleFields(unsigned long channelNumber, const char *readAPIKey)
 {
@@ -1336,7 +1388,9 @@ bool AsyncTS::readMultipleFields(unsigned long channelNumber, const char *readAP
  * @param channelNumber Channel number
  * @param readAPIKey Read API key associated with the channel. *If you share code with others, do _not_ share this key*
  * @param ruscb User's callback function to process the server response.
- * @returns If false - client is busy, can't connect. (Through ruscb:200 status code +std::any<AsyncTS>* if successful.)
+ * @retval false: AsyncTS client is busy. Couldn't send the request.
+ * @retval true: request is under sending.
+ * @post Through ruscb:200 status code +std::any<AsyncTS>* if successful.
 */
 bool AsyncTS::readMultipleFields(unsigned long channelNumber, const char * readAPIKey, readResponseUserCB ruscb)
 {
@@ -1350,7 +1404,9 @@ bool AsyncTS::readMultipleFields(unsigned long channelNumber, const char * readA
  * values locally in variables within a struct.
  * @pre First call  onReadServerResponseUserCB(), to set the user's callback function.
  * @param channelNumber Channel number
- * @returns If false - client is busy, can't connect. (Through ruscb:200 status code + std::any<AsyncTS>* if successful.)
+ * @retval false: AsyncTS client is busy. Couldn't send the request.
+ * @retval true: request is under sending.
+ * @post Through ruscb:200 status code + std::any<AsyncTS>* if successful.
 */
 bool AsyncTS::readMultipleFields(unsigned long channelNumber)
 {
@@ -1363,7 +1419,9 @@ bool AsyncTS::readMultipleFields(unsigned long channelNumber)
  * values locally in variables within a struct.
  * @param channelNumber Channel number
  * @param ruscb User's callback function to process the server response.
- * @returns If false - client is busy, can't connect. (Through ruscb:200 status code + std::any<AsyncTS>* if successful.)
+ * @retval false: AsyncTS client is busy. Couldn't send the request.
+ * @retval true: request is under sending.
+ * @post Through ruscb:200 status code + std::any<AsyncTS>* if successful.
 */
 bool AsyncTS::readMultipleFields(unsigned long channelNumber, readResponseUserCB ruscb)
 {
@@ -1386,7 +1444,8 @@ void AsyncTS::_readStatusCB()
  * @post User's callback need process std::any<String>*.
  * @param channelNumber Channel number
  * @param readAPIKey Read API key associated with the channel.  *If you share code with others, do _not_ share this key*
- * @return If false - client is busy, can't connect.
+ * @retval false: AsyncTS client is busy. Couldn't send the request.
+ * @retval true: request is under sending.
 */
 bool AsyncTS::readStatus(unsigned long channelNumber, const char *readAPIKey)
 {
@@ -1402,7 +1461,8 @@ bool AsyncTS::readStatus(unsigned long channelNumber, const char *readAPIKey)
  * @param channelNumber Channel number
  * @param readAPIKey Read API key associated with the channel.  *If you share code with others, do _not_ share this key*
  * @param ruscb User's callback function to process the server response.
- * @return If false - client is busy, can't connect.
+ * @retval false: AsyncTS client is busy. Couldn't send the request.
+ * @retval true: request is under sending.
 */
 bool AsyncTS::readStatus(unsigned long channelNumber, const char * readAPIKey, readResponseUserCB ruscb)
 {
@@ -1415,7 +1475,8 @@ bool AsyncTS::readStatus(unsigned long channelNumber, const char * readAPIKey, r
  * @pre Call onReadServerResponseUserCB() before.
  * @post User's callback need process std::any<String>*.
  * @param channelNumber Channel number
- * @return If false - client is busy, can't connect.
+ * @retval false: AsyncTS client is busy. Couldn't send the request.
+ * @retval true: request is under sending.
 */
 bool AsyncTS::readStatus(unsigned long channelNumber)
 {
@@ -1426,7 +1487,8 @@ bool AsyncTS::readStatus(unsigned long channelNumber)
  * @post User's callback need process std::any<String>*.
  * @param channelNumber Channel number
  * @param ruscb User's callback function to process the server response.
- * @return If false - client is busy, can't connect.
+ * @retval false: AsyncTS client is busy. Couldn't send the request.
+ * @retval true: request is under sending.
 */
 bool AsyncTS::readStatus(unsigned long channelNumber, readResponseUserCB ruscb)
 {
