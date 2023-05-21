@@ -9,4 +9,4 @@ In asynchronous mode, while the server is thinking about the answer, your progra
 
 ## Brief overview
 
-The client can handle one request at a time. And until it finishes the previous one, it returns "false". Before sending a request, you must set up a callback function to process server responses. The request type can be for the server to store data or to return data. 
+The client can handle one request at a time. And until it finishes the previous one, it returns "false". Before sending a request, you must set up a callback function to process server responses. The request type can be of two types, either it sends data to the server for storage or it requests to retrieve stored data.

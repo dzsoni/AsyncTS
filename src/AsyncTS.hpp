@@ -212,6 +212,7 @@ class AsyncTS
     String  _parseValues(String & multiContent, String key);
     unsigned int  _send();
     bool    _readRaw(unsigned long channelNumber, String suffixURL, const char * readAPIKey);
+    bool    _isReady();
     
     
 
