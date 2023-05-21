@@ -475,7 +475,7 @@ bool AsyncTS::writeRaw(unsigned long channelNumber, String postMessage, const ch
 {
     _lastTSerrorcode=TS_OK_SUCCESS;
     DEBUG_ATS("ats::writeRaw(channelNumber:%lu message:%s writeAPIKey: %s)\r\n", channelNumber, postMessage, writeAPIKey);
-    if (_state != DISCONNECTED)
+    if (!_isReady())
     {
         DEBUG_ATS("ats::writeRaw Clinet is busy.");
         _lastTSerrorcode = TS_ERR_CONNECT_FAILED;
@@ -516,6 +516,12 @@ bool AsyncTS::writeRaw(unsigned long channelNumber, String postMessage, const ch
 */
 bool AsyncTS::writeRaw(unsigned long channelNumber, String postMessage, const char *writeAPIKey, writeResponseUserCB wrucb)
 {
+    if (!_isReady())
+    {
+        DEBUG_ATS("ats::writeRaw Clinet is busy.");
+        _lastTSerrorcode = TS_ERR_CONNECT_FAILED;
+        return false;
+    }
     _writeResponseUserCB = wrucb;
     return writeRaw(channelNumber,postMessage,writeAPIKey);
 }
@@ -534,13 +540,12 @@ bool AsyncTS::_readRaw(unsigned long channelNumber, String suffixURL, const char
 {
     DEBUG_ATS("ats::readRaw (channelNumber: %lu  readAPIkey: %s suffixURL: \"%s\r\n", channelNumber, readAPIKey, suffixURL.c_str());
     _lastTSerrorcode=TS_OK_SUCCESS;
-    if (_state != DISCONNECTED)
+    if (!_isReady())
     {
         DEBUG_ATS("ats::readRaw Clinet is busy.");
         _lastTSerrorcode = TS_ERR_CONNECT_FAILED;
         return false;
     }
-
     _writesession = false;
     _response.flush();
     _request.flush();
@@ -562,6 +567,11 @@ bool AsyncTS::_readRaw(unsigned long channelNumber, String suffixURL, const char
     return true;
 }
 
+bool AsyncTS::_isReady()
+{
+    return (_state==DISCONNECTED);
+}
+
 /**
   * @brief Read a raw response from a private ThingSpeak channel
   * @pre Call onReadServerResponseUserCB() before.
@@ -574,6 +584,12 @@ bool AsyncTS::_readRaw(unsigned long channelNumber, String suffixURL, const char
  */
 bool AsyncTS::readRaw(unsigned long channelNumber, String suffixURL, const char * readAPIKey)
 {
+    if (!_isReady())
+    {
+        DEBUG_ATS("ats::writeRaw Clinet is busy.");
+        _lastTSerrorcode = TS_ERR_CONNECT_FAILED;
+        return false;
+    }
     _retValueSelector = [this](){ this->_readStringFieldCB(); };
     return _readRaw(channelNumber,suffixURL,readAPIKey);
 }
@@ -588,6 +604,12 @@ bool AsyncTS::readRaw(unsigned long channelNumber, String suffixURL, const char 
  */
 bool AsyncTS::readRaw(unsigned long channelNumber, String suffixURL, const char * readAPIKey, readResponseUserCB ruscb)
 {
+    if (!_isReady())
+    {
+        DEBUG_ATS("ats::writeRaw Clinet is busy.");
+        _lastTSerrorcode = TS_ERR_CONNECT_FAILED;
+        return false;
+    }
     _readResponseUserCB = ruscb;
     _retValueSelector = [this](){ this->_readStringFieldCB(); };
     return _readRaw(channelNumber,suffixURL,readAPIKey);
@@ -620,6 +642,12 @@ void AsyncTS::_readCreatedAtCB()
 */
 bool AsyncTS::readCreatedAt(unsigned long channelNumber, const char *readAPIKey)
 {
+    if (!_isReady())
+    {
+        DEBUG_ATS("ats::writeRaw Clinet is busy.");
+        _lastTSerrorcode = TS_ERR_CONNECT_FAILED;
+        return false;
+    }
     _retValueSelector = [this](){ this->_readCreatedAtCB();};
     _request.flush();
     _response.flush();
@@ -638,6 +666,12 @@ bool AsyncTS::readCreatedAt(unsigned long channelNumber, const char *readAPIKey)
 */
 bool AsyncTS::readCreatedAt(unsigned long channelNumber, const char * readAPIKey, readResponseUserCB ruscb)
 {
+    if (!_isReady())
+    {
+        DEBUG_ATS("ats::writeRaw Clinet is busy.");
+        _lastTSerrorcode = TS_ERR_CONNECT_FAILED;
+        return false;
+    }
     _readResponseUserCB = ruscb;
     return readCreatedAt(channelNumber,readAPIKey);
 }
@@ -669,6 +703,12 @@ bool AsyncTS::readCreatedAt(unsigned long channelNumber)
 */
 bool AsyncTS::readCreatedAt(unsigned long channelNumber, readResponseUserCB ruscb)
 {
+    if (!_isReady())
+    {
+        DEBUG_ATS("ats::writeRaw Clinet is busy.");
+        _lastTSerrorcode = TS_ERR_CONNECT_FAILED;
+        return false;
+    }
     _readResponseUserCB = ruscb;
     return readCreatedAt(channelNumber,NULL);
 }
@@ -716,9 +756,9 @@ bool AsyncTS::writeField(unsigned long channelNumber, unsigned int field, String
 {
     _lastTSerrorcode=TS_OK_SUCCESS;
     DEBUG_ATS("ats::writeField begin \r\n")
-    if (_state != DISCONNECTED)
+   if (!_isReady())
     {
-        DEBUG_ATS("ats::writeField Clinet is busy.")
+        DEBUG_ATS("ats::writeRaw Clinet is busy.");
         _lastTSerrorcode = TS_ERR_CONNECT_FAILED;
         return false;
     }
@@ -766,6 +806,12 @@ bool AsyncTS::writeField(unsigned long channelNumber, unsigned int field, String
 */
 bool AsyncTS::writeField(unsigned long channelNumber, unsigned int field, String value, const char * writeAPIKey, writeResponseUserCB wrucb)
 {
+    if (!_isReady())
+    {
+        DEBUG_ATS("ats::writeRaw Clinet is busy.");
+        _lastTSerrorcode = TS_ERR_CONNECT_FAILED;
+        return false;
+    }
     _writeResponseUserCB = wrucb;
     return writeField(channelNumber,field,value,writeAPIKey);
 }
@@ -783,7 +829,13 @@ bool AsyncTS::writeField(unsigned long channelNumber, unsigned int field, String
  * @retval true: request is under sending.
 */
 bool AsyncTS::writeField(unsigned long channelNumber, unsigned int field, int value, const char *writeAPIKey)
-{
+{   
+    if (!_isReady())
+    {
+        DEBUG_ATS("ats::writeRaw Clinet is busy.");
+        _lastTSerrorcode = TS_ERR_CONNECT_FAILED;
+        return false;
+    }
     char valueString[10]; // int range is -32768 to 32768, so 7 bytes including terminator, plus a little extra
     itoa(value, valueString, 10);
     return writeField(channelNumber, field, valueString, writeAPIKey);
@@ -801,6 +853,12 @@ bool AsyncTS::writeField(unsigned long channelNumber, unsigned int field, int va
 */
 bool AsyncTS::writeField(unsigned long channelNumber, unsigned int field, int value, const char * writeAPIKey, writeResponseUserCB wrucb)
 {
+    if (!_isReady())
+    {
+        DEBUG_ATS("ats::writeRaw Clinet is busy.");
+        _lastTSerrorcode = TS_ERR_CONNECT_FAILED;
+        return false;
+    }
     _writeResponseUserCB = wrucb;
     return writeField(channelNumber, field, value, writeAPIKey);
 }
@@ -819,6 +877,12 @@ bool AsyncTS::writeField(unsigned long channelNumber, unsigned int field, int va
 */
 bool AsyncTS::writeField(unsigned long channelNumber, unsigned int field, long value, const char *writeAPIKey)
 {
+    if (!_isReady())
+    {
+        DEBUG_ATS("ats::writeRaw Clinet is busy.");
+        _lastTSerrorcode = TS_ERR_CONNECT_FAILED;
+        return false;
+    }
     char valueString[15]; // long range is -2147483648 to 2147483647, so 12 bytes including terminator
     ltoa(value, valueString, 10);
     return writeField(channelNumber, field, valueString, writeAPIKey);
@@ -836,6 +900,12 @@ bool AsyncTS::writeField(unsigned long channelNumber, unsigned int field, long v
 */
 bool AsyncTS::writeField(unsigned long channelNumber, unsigned int field, long value, const char * writeAPIKey, writeResponseUserCB wrucb)
 {
+    if (!_isReady())
+    {
+        DEBUG_ATS("ats::writeRaw Clinet is busy.");
+        _lastTSerrorcode = TS_ERR_CONNECT_FAILED;
+        return false;
+    }
     _writeResponseUserCB = wrucb;
     return writeField(channelNumber, field, value, writeAPIKey);
 }
@@ -854,6 +924,12 @@ bool AsyncTS::writeField(unsigned long channelNumber, unsigned int field, long v
 */
 bool AsyncTS::writeField(unsigned long channelNumber, unsigned int field, float value, const char *writeAPIKey)
 {
+    if (!_isReady())
+    {
+        DEBUG_ATS("ats::writeRaw Clinet is busy.");
+        _lastTSerrorcode = TS_ERR_CONNECT_FAILED;
+        return false;
+    }
     char valueString[20]; // range is -999999000000.00000 to 999999000000.00000, so 19 + 1 for the terminator
     int status = _convertFloatToChar(value, valueString);
     if (status != TS_OK_SUCCESS)
@@ -878,6 +954,12 @@ bool AsyncTS::writeField(unsigned long channelNumber, unsigned int field, float 
 */
 bool AsyncTS::writeField(unsigned long channelNumber, unsigned int field, float value, const char * writeAPIKey, writeResponseUserCB wrucb)
 {
+    if (!_isReady())
+    {
+        DEBUG_ATS("ats::writeRaw Clinet is busy.");
+        _lastTSerrorcode = TS_ERR_CONNECT_FAILED;
+        return false;
+    }
     _writeResponseUserCB = wrucb;
     return writeField(channelNumber, field, value, writeAPIKey);
 }
@@ -895,9 +977,9 @@ bool AsyncTS::writeField(unsigned long channelNumber, unsigned int field, float 
 */
 bool AsyncTS::writeFields(unsigned long channelNumber, const char *writeAPIKey)
 {
-    if (_state != DISCONNECTED)
+    if (!_isReady())
     {
-        DEBUG_ATS("ats::writeFields Clinet is busy.\r\n")
+        DEBUG_ATS("ats::writeRaw Clinet is busy.");
         _lastTSerrorcode = TS_ERR_CONNECT_FAILED;
         return false;
     }
@@ -1038,6 +1120,12 @@ bool AsyncTS::writeFields(unsigned long channelNumber, const char *writeAPIKey)
 */
 bool AsyncTS::writeFields(unsigned long channelNumber, const char * writeAPIKey, writeResponseUserCB wrucb)
 {
+    if (!_isReady())
+    {
+        DEBUG_ATS("ats::writeRaw Clinet is busy.");
+        _lastTSerrorcode = TS_ERR_CONNECT_FAILED;
+        return false;
+    }
     _writeResponseUserCB = wrucb;
     return writeFields(channelNumber, writeAPIKey);
 }
@@ -1064,6 +1152,12 @@ void AsyncTS::_readStringFieldCB()
 */
 bool AsyncTS::readStringField(unsigned long channelNumber, unsigned int field, const char *readAPIKey)
 {
+    if (!_isReady())
+    {
+        DEBUG_ATS("ats::writeRaw Clinet is busy.");
+        _lastTSerrorcode = TS_ERR_CONNECT_FAILED;
+        return false;
+    }
     _retValueSelector = [this]()
     { this->_readStringFieldCB(); };
     return _readStringFieldInternal(channelNumber, field, readAPIKey);
@@ -1081,6 +1175,12 @@ bool AsyncTS::readStringField(unsigned long channelNumber, unsigned int field, c
 */
 bool AsyncTS::readStringField(unsigned long channelNumber, unsigned int field, const char * readAPIKey, readResponseUserCB ruscb)
 {
+    if (!_isReady())
+    {
+        DEBUG_ATS("ats::writeRaw Clinet is busy.");
+        _lastTSerrorcode = TS_ERR_CONNECT_FAILED;
+        return false;
+    }
     _readResponseUserCB = ruscb;
     return readStringField(channelNumber,field, readAPIKey);
 }
@@ -1097,8 +1197,13 @@ bool AsyncTS::readStringField(unsigned long channelNumber, unsigned int field, c
 */
 bool AsyncTS::readStringField(unsigned long channelNumber, unsigned int field)
 {
-    _retValueSelector = [this]()
-    { this->_readStringFieldCB(); };
+    if (!_isReady())
+    {
+        DEBUG_ATS("ats::writeRaw Clinet is busy.");
+        _lastTSerrorcode = TS_ERR_CONNECT_FAILED;
+        return false;
+    }
+    _retValueSelector = [this](){ this->_readStringFieldCB(); };
     return _readStringFieldInternal(channelNumber, field, NULL);
 }
 /**
@@ -1112,6 +1217,12 @@ bool AsyncTS::readStringField(unsigned long channelNumber, unsigned int field)
 */
 bool AsyncTS::readStringField(unsigned long channelNumber, unsigned int field , readResponseUserCB ruscb)
 {
+    if (!_isReady())
+    {
+        DEBUG_ATS("ats::writeRaw Clinet is busy.");
+        _lastTSerrorcode = TS_ERR_CONNECT_FAILED;
+        return false;
+    }
     _readResponseUserCB = ruscb;
     return readStringField(channelNumber,field);   
 }
@@ -1137,6 +1248,12 @@ void AsyncTS::_readFloatFieldCB()
 */
 bool AsyncTS::readFloatField(unsigned long channelNumber, unsigned int field, const char *readAPIKey)
 {
+    if (!_isReady())
+    {
+        DEBUG_ATS("ats::writeRaw Clinet is busy.");
+        _lastTSerrorcode = TS_ERR_CONNECT_FAILED;
+        return false;
+    }
     _retValueSelector = [this]()
     { this->_readFloatFieldCB(); };
     return _readStringFieldInternal(channelNumber, field, readAPIKey);
@@ -1154,6 +1271,12 @@ bool AsyncTS::readFloatField(unsigned long channelNumber, unsigned int field, co
 */
 bool AsyncTS::readFloatField(unsigned long channelNumber, unsigned int field, const char * readAPIKey, readResponseUserCB ruscb)
 {
+    if (!_isReady())
+    {
+        DEBUG_ATS("ats::writeRaw Clinet is busy.");
+        _lastTSerrorcode = TS_ERR_CONNECT_FAILED;
+        return false;
+    }
     _readResponseUserCB = ruscb;
     return readFloatField(channelNumber , field, readAPIKey);
 }
@@ -1185,6 +1308,12 @@ bool AsyncTS::readFloatField(unsigned long channelNumber, unsigned int field)
 */
 bool AsyncTS::readFloatField(unsigned long channelNumber, unsigned int field, readResponseUserCB ruscb)
 {
+    if (!_isReady())
+    {
+        DEBUG_ATS("ats::writeRaw Clinet is busy.");
+        _lastTSerrorcode = TS_ERR_CONNECT_FAILED;
+        return false;
+    }
     _readResponseUserCB = ruscb;
     return readFloatField(channelNumber , field, NULL);
 }
@@ -1211,6 +1340,12 @@ void AsyncTS::_readLongFieldCB()
 */
 bool AsyncTS::readLongField(unsigned long channelNumber, unsigned int field, const char *readAPIKey)
 {
+    if (!_isReady())
+    {
+        DEBUG_ATS("ats::writeRaw Clinet is busy.");
+        _lastTSerrorcode = TS_ERR_CONNECT_FAILED;
+        return false;
+    }
     _retValueSelector = [this]()
     { this->_readLongFieldCB(); };
     return _readStringFieldInternal(channelNumber, field, readAPIKey);
@@ -1229,6 +1364,12 @@ bool AsyncTS::readLongField(unsigned long channelNumber, unsigned int field, con
 */
 bool AsyncTS::readLongField(unsigned long channelNumber, unsigned int  field, const char * readAPIKey, readResponseUserCB ruscb)
 {
+ if (!_isReady())
+    {
+        DEBUG_ATS("ats::writeRaw Clinet is busy.");
+        _lastTSerrorcode = TS_ERR_CONNECT_FAILED;
+        return false;
+    }
  _readResponseUserCB = ruscb;
  return readLongField(channelNumber, field, readAPIKey);   
 }
@@ -1260,6 +1401,12 @@ bool AsyncTS::readLongField(unsigned long channelNumber, unsigned int field)
 */
 bool AsyncTS::readLongField(unsigned long channelNumber, unsigned int field, readResponseUserCB ruscb)
 {
+    if (!_isReady())
+    {
+        DEBUG_ATS("ats::writeRaw Clinet is busy.");
+        _lastTSerrorcode = TS_ERR_CONNECT_FAILED;
+        return false;
+    }
     _readResponseUserCB = ruscb;
     return readLongField(channelNumber,field, NULL);
 }
@@ -1286,6 +1433,12 @@ void AsyncTS::_readIntFieldCB()
 */
 bool AsyncTS::readIntField(unsigned long channelNumber, unsigned int field, const char *readAPIKey)
 {
+    if (!_isReady())
+    {
+        DEBUG_ATS("ats::writeRaw Clinet is busy.");
+        _lastTSerrorcode = TS_ERR_CONNECT_FAILED;
+        return false;
+    }
     _retValueSelector = [this](){ this->_readIntFieldCB(); };
     return _readStringFieldInternal(channelNumber, field, readAPIKey);
 }
@@ -1303,6 +1456,12 @@ bool AsyncTS::readIntField(unsigned long channelNumber, unsigned int field, cons
 */
 bool AsyncTS::readIntField(unsigned long channelNumber, unsigned int field, const char * readAPIKey, readResponseUserCB ruscb)
 {
+    if (!_isReady())
+    {
+        DEBUG_ATS("ats::writeRaw Clinet is busy.");
+        _lastTSerrorcode = TS_ERR_CONNECT_FAILED;
+        return false;
+    }
     _readResponseUserCB = ruscb;
     return readIntField(channelNumber,field, readAPIKey);   
 }
@@ -1334,6 +1493,12 @@ bool AsyncTS::readIntField(unsigned long channelNumber, unsigned int field)
 */
 bool AsyncTS::readIntField(unsigned long channelNumber, unsigned int field, readResponseUserCB ruscb)
 {
+    if (!_isReady())
+    {
+        DEBUG_ATS("ats::writeRaw Clinet is busy.");
+        _lastTSerrorcode = TS_ERR_CONNECT_FAILED;
+        return false;
+    }
     _readResponseUserCB = ruscb;
     return readIntField(channelNumber, field, NULL);
 }
@@ -1375,6 +1540,12 @@ void AsyncTS::_readMultipleFieldsCB()
 */
 bool AsyncTS::readMultipleFields(unsigned long channelNumber, const char *readAPIKey)
 {
+    if (!_isReady())
+    {
+        DEBUG_ATS("ats::writeRaw Clinet is busy.");
+        _lastTSerrorcode = TS_ERR_CONNECT_FAILED;
+        return false;
+    }
     String readCondition = "/feeds/last.txt?status=true&location=true";
     _retValueSelector = [this]()
     { this->_readMultipleFieldsCB(); };
@@ -1394,6 +1565,12 @@ bool AsyncTS::readMultipleFields(unsigned long channelNumber, const char *readAP
 */
 bool AsyncTS::readMultipleFields(unsigned long channelNumber, const char * readAPIKey, readResponseUserCB ruscb)
 {
+    if (!_isReady())
+    {
+        DEBUG_ATS("ats::writeRaw Clinet is busy.");
+        _lastTSerrorcode = TS_ERR_CONNECT_FAILED;
+        return false;
+    }
     _readResponseUserCB = ruscb;
     return readMultipleFields(channelNumber, readAPIKey);
 }
@@ -1425,6 +1602,12 @@ bool AsyncTS::readMultipleFields(unsigned long channelNumber)
 */
 bool AsyncTS::readMultipleFields(unsigned long channelNumber, readResponseUserCB ruscb)
 {
+    if (!_isReady())
+    {
+        DEBUG_ATS("ats::writeRaw Clinet is busy.");
+        _lastTSerrorcode = TS_ERR_CONNECT_FAILED;
+        return false;
+    }
     _readResponseUserCB = ruscb;
     return  readMultipleFields(channelNumber, NULL);
 }
@@ -1449,6 +1632,12 @@ void AsyncTS::_readStatusCB()
 */
 bool AsyncTS::readStatus(unsigned long channelNumber, const char *readAPIKey)
 {
+    if (!_isReady())
+    {
+        DEBUG_ATS("ats::writeRaw Clinet is busy.");
+        _lastTSerrorcode = TS_ERR_CONNECT_FAILED;
+        return false;
+    }
     String content = "/feeds/last.txt?status=true&location=true";
     _retValueSelector = [this]()
     { this->_readStatusCB(); };
@@ -1466,6 +1655,12 @@ bool AsyncTS::readStatus(unsigned long channelNumber, const char *readAPIKey)
 */
 bool AsyncTS::readStatus(unsigned long channelNumber, const char * readAPIKey, readResponseUserCB ruscb)
 {
+    if (!_isReady())
+    {
+        DEBUG_ATS("ats::writeRaw Clinet is busy.");
+        _lastTSerrorcode = TS_ERR_CONNECT_FAILED;
+        return false;
+    }
     _readResponseUserCB = ruscb;
     return readStatus(channelNumber,readAPIKey);    
 }
@@ -1492,6 +1687,12 @@ bool AsyncTS::readStatus(unsigned long channelNumber)
 */
 bool AsyncTS::readStatus(unsigned long channelNumber, readResponseUserCB ruscb)
 {
+    if (!_isReady())
+    {
+        DEBUG_ATS("ats::writeRaw Clinet is busy.");
+        _lastTSerrorcode = TS_ERR_CONNECT_FAILED;
+        return false;
+    }
     _readResponseUserCB = ruscb;
     return readStatus(channelNumber,NULL);
 }
