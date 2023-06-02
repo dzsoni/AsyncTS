@@ -27,10 +27,10 @@ void writeServerResponse(int code)
 {
   Serial.println("Server response:" + String(code));
 }
-// User callback  function for read funtions (expect String)
-void readServerStringResponse(int code, std::any* resp)
+// User call back  function for read funtions (expect String)
+void readServerIntResponse(int code, std::any* resp)
 {
-    auto* a = std::any_cast<String>(resp);
+    auto* a = std::any_cast<int>(resp);
     if (!a) 
     {
         // Type-mismatch
@@ -39,7 +39,7 @@ void readServerStringResponse(int code, std::any* resp)
     }
     
          Serial.println("Response code:" + String(code));
-         Serial.println("Response: " + *a);
+         Serial.println("Response: " + String(*a));
 }
 
 
@@ -68,7 +68,7 @@ void setup() {
   Serial.println("          writeField");
   Serial.println("***************************************************");
   Serial.println("Sending datat to ThingSpeak.");
-  while(!ats.writeField(channelID,1,"1234",writeAPIkey))
+  while(!ats.writeField(channelID,1,12345,writeAPIkey))
   {
     Serial.println("Can't send.");
     delay(1000);
@@ -77,11 +77,11 @@ void setup() {
   delay(MIN_THINGSPEAK_DELAY);
 
   Serial.println("***************************************************");
-  Serial.println("          readStringField");
+  Serial.println("          readIntField");
   Serial.println("***************************************************");
 
-  ats.onReadServerResponseUserCB(readServerStringResponse);
-  while(!ats.readStringField(channelID,1,readAPIkey))
+  ats.onReadServerResponseUserCB(readServerIntResponse);
+  while(!ats.readIntField(channelID,1,readAPIkey))
   {
    delay(1000);
   }

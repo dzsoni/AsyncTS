@@ -15,8 +15,8 @@
 void writeThingSpeak();//forward declaration
 
 
-const char ssid[] = "";                      // Set your WiFi SSID
-const char password[] = "";                  // Set your WiFi password
+const char ssid[] = "";                      // Set you WiFi SSID
+const char password[] = "";                  // Set you WiFi password
 unsigned long channelID = 111111;            // Set your channel ID  
 const char writeAPIkey[] = "";               //Set your writeAPIkey
 const char readAPIkey[] = "";                //Set your readAPIkey
@@ -30,7 +30,7 @@ AsyncTS ats;
 Scheduler taskManager;
 Task writeTS(MIN_THINGSPEAK_DELAY, TASK_FOREVER, &writeThingSpeak, &taskManager, false);
 
-// User callback function for write actions 
+// User call back function for write actions 
 void writeServerResponse(int code)
 {
   Serial.println("Response time:"+String(millis()-start)+"ms");
@@ -38,7 +38,7 @@ void writeServerResponse(int code)
   writeTS.disable();
   writeTS.enableDelayed();
 }
-//send data periodically to ThingSpeak
+//send data periodicaly to ThingSpeak
 void writeThingSpeak()
 {
  if(!ats.writeField(channelID,field,String(value),writeAPIkey))

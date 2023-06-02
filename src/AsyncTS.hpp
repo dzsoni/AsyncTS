@@ -26,7 +26,8 @@ SOFTWARE.
 Based on:
 mathworks/thingspeak-arduino,
 me-no-dev/AsyncTCP and
-boblemaire/asyncHTTPrequest libraries. 
+boblemaire/asyncHTTPrequest libraries.
+Bob Lemaire, IoTaWatt, Inc. xbuf
 
 Required libraries:
 https://github.com/me-no-dev/AsyncTCP
@@ -48,16 +49,16 @@ https://github.com/me-no-dev/ESPAsyncTCP
 #define DEBUG_IOTA_PORT Serial
 #endif
 
-#ifndef ESP32
+#ifdef ARDUINO_ARCH_ESP8266
 #include <ESPAsyncTCP.h>
-#define _seize
-#define _release
+#define SEMAPHORE_TAKE(X)
+#define SEMAPHORE_GIVE()
 #endif
 
-#ifdef ESP32
+#ifdef ARDUINO_ARCH_ESP32
 #include <AsyncTCP.h>
-#define _seize xSemaphoreTakeRecursive(threadLock, portMAX_DELAY)
-#define _release xSemaphoreGiveRecursive(threadLock)
+#define SEMAPHORE_TAKE() xSemaphoreTake(_xSemaphore, portMAX_DELAY)
+#define SEMAPHORE_GIVE() xSemaphoreGive(_xSemaphore)
 #endif
 
 #ifdef DONT_COMPILE_DEBUG_LINES_AsyncTS
@@ -230,6 +231,9 @@ class AsyncTS
     void    _readCreatedAtCB();
     void    _readMultipleFieldsCB();
     void    _readStatusCB();
+#if defined(ARDUINO_ARCH_ESP32)
+  SemaphoreHandle_t _xSemaphore = nullptr;
+#endif
 
 public:
    

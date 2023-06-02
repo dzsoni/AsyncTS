@@ -4,6 +4,9 @@ AsyncTS::AsyncTS()
 {
     _resetWriteFields();
     _lastTSerrorcode = TS_OK_SUCCESS;
+    #ifdef ARDUINO_ARCH_ESP32
+    _xSemaphore = xSemaphoreCreateMutex();
+    #endif
 }
 AsyncTS::~AsyncTS()
 {
@@ -295,7 +298,7 @@ unsigned int AsyncTS::_send()
 void AsyncTS::_onConnect(AsyncClient *client)
 {
     DEBUG_ATS("ats::_onConnect handle \r\n");
-    _seize;
+    SEMAPHORE_TAKE();
     _setState(CONNECTED);
     //_response = new xbuf;
     _contentLength = 0;
@@ -311,7 +314,7 @@ void AsyncTS::_onConnect(AsyncClient *client)
         _send();
     }
     _lastActivity = millis();
-    _release;
+    SEMAPHORE_GIVE();
 }
 
 void AsyncTS::_onDisconnect(AsyncClient *client)
@@ -324,7 +327,7 @@ void AsyncTS::_onDisconnect(AsyncClient *client)
 void AsyncTS::_onData(void *Vbuf, size_t len)
 {
     DEBUG_ATS("_onData handler %.16s... (%d)\r\n", (char *)Vbuf, len);
-    _seize;
+    SEMAPHORE_TAKE();
     _lastActivity = millis();
 
     // Transfer data to xbuf
@@ -343,6 +346,7 @@ void AsyncTS::_onData(void *Vbuf, size_t len)
         if (!headerLine.length())
         {
             _lastTSerrorcode = TS_ERR_BAD_RESPONSE;
+            SEMAPHORE_GIVE();
             return;
         }
 
@@ -394,10 +398,11 @@ void AsyncTS::_onData(void *Vbuf, size_t len)
                 _retValueSelector();
         }
         _setState(RESCOMPLETE);
-        _client->stop();
         _setState(DISCONNECTING);
+        _client->stop();
+        
     }
-    _release;
+    SEMAPHORE_GIVE();
 }
 
 void AsyncTS::_onError(AsyncClient *client, int8_t error)
