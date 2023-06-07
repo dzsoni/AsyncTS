@@ -14,11 +14,17 @@ Before sending a request, you must set up a callback function to process server 
 For write functions you have to define a callback function like this:
 
 ```c++
+AsyncClient client;
+AsyncTS ats;
 void UserCallbackForAnyWriteFuncton(int code)
 {
   //you can do something with return code.
   Serial.println("Server response:" + String(code));
 }
+int intvalue=4;//data for sending
+ats.begin(client);
+ats.onWriteServerResponseUserCB(UserCallbackForAnyWriteFuncton);
+ats.writeField(channelID,field_num,intvalue,writeAPIkey);
 ```
 
 This is true for all writing functions. Since the server returns only an error code of type int.  

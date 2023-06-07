@@ -72,11 +72,17 @@ Brief overview</h1>
 <p>The <a class="el" href="class_async_t_s.html">AsyncTS</a> client can handle one request at a time. And until it finishes the previous one, it returns "false". So the new request has not been sent, if read or write functions return "false". Before sending a request, you must set up a callback function to process server responses. The request type can be of two types, either it sends data to the server for storage or it requests to retrieve stored data. <br  />
  For write functions you have to define a callback function like this:</p>
 <div class="fragment"><div class="line"> {c++}</div>
+<div class="line">AsyncClient client;</div>
+<div class="line">AsyncTS ats;</div>
 <div class="line">void UserCallbackForAnyWriteFuncton(int code)</div>
 <div class="line">{</div>
 <div class="line">  //you can do something with return code.</div>
 <div class="line">  Serial.println(&quot;Server response:&quot; + String(code));</div>
 <div class="line">}</div>
+<div class="line">int intvalue=4;//data for sending</div>
+<div class="line">ats.begin(client);</div>
+<div class="line">ats.onWriteServerResponseUserCB(UserCallbackForAnyWriteFuncton);</div>
+<div class="line">ats.writeField(channelID,field_num,intvalue,writeAPIkey);</div>
 </div><!-- fragment --><p>This is true for all writing functions. Since the server returns only an error code of type int. <br  />
  For read functions you have to define a callback functions with an int parmeter for return code, and a <code>std::any*</code> for the server response. Inside the function, you must create a pointer to the type required by the function using <code>std::any_cast&lt;T&gt;</code>. If you cast to an incorrect type, you get a null pointer. Example:</p>
 <div class="fragment"><div class="line"> {c++}</div>
