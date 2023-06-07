@@ -51,7 +51,7 @@ ats.readIntField(channelID,field_num,readAPIkey);
 ## Note
 
 To ESP32 platform I could only compile with  Visual Studio Code - PlatformIO IDE.
-For success put these lines in the platformio.ini file (below your ESP32 env. section).
+For success, put these lines in the platformio.ini file (below your ESP32 env. section).
 
 ```text
 [env:ESP32]
