@@ -250,20 +250,8 @@ public:
      */
     bool debug                (){ return _debug; };
 
-    /**
-     * @brief Set the callback function to process the server reponse. The user's function is called after these
-     * 'write' funtions: writeField(),writeFields(),writeRaw()
-     * @param wrucb User's callback function.
-    */
-    void onWriteServerResponseUserCB(writeResponseUserCB wrucb){_writeResponseUserCB=wrucb;};
-
-    /**
-     * @brief Set the callback function to process the server reponse. The user's function is called after these
-     * 'read' funtions: readCreatedAt(), readFloatField(), readIntField(), readLongField(), 
-     * readMultipleFields(), readRaw(), readStatus(), readStringField().
-     * @param reucb User's callback function.
-    */
-    void onReadServerResponseUserCB(readResponseUserCB reucb) {_readResponseUserCB=reucb;};
+    bool onWriteServerResponseUserCB(writeResponseUserCB wrucb);
+    bool onReadServerResponseUserCB(readResponseUserCB reucb);
 
     /**
      * @brief Get last error code.

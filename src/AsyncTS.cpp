@@ -748,6 +748,41 @@ void AsyncTS::setDebug(bool debug)
 }
 
 /**
+ * @brief Set the callback function to process the server reponse. The user's function is called after these
+ * 'write' funtions: writeField(),writeFields(),writeRaw()
+ * @param wrucb User's callback function.
+ * @return False if couldn't set the callback function.
+*/
+bool AsyncTS::onWriteServerResponseUserCB(writeResponseUserCB wrucb)
+{
+  if (!_isReady())
+    {
+        DEBUG_ATS("ats::onWriteServerResponseUserCB: Client is busy.");
+        return false;
+    }
+    _writeResponseUserCB = wrucb;
+    return true;
+}
+
+/**
+* @brief Set the callback function to process the server reponse. The user's function is called after these
+* 'read' funtions: readCreatedAt(), readFloatField(), readIntField(), readLongField(), 
+* readMultipleFields(), readRaw(), readStatus(), readStringField().
+* @param reucb User's callback function.
+* @return False if couldn't set the callback function.
+*/
+bool AsyncTS::onReadServerResponseUserCB(readResponseUserCB reucb)
+{
+    if (!_isReady())
+    {
+        DEBUG_ATS("ats::onReadServerResponseUserCB: Client is busy.");
+        return false;
+    }
+    _readResponseUserCB = reucb;
+    return true;
+}
+
+/**
  * @brief Write a String value to a single field in a ThingSpeak channel.
  * @pre Call onWriteServerResponseUserCB() to set the user's callback function.
  * @param   channelNumber   Channel number.
