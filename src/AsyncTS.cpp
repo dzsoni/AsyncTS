@@ -1576,7 +1576,7 @@ void AsyncTS::_readMultipleFieldsCB()
  * @param readAPIKey Read API key associated with the channel. *If you share code with others, do _not_ share this key*
  * @retval false: AsyncTS client is busy. Couldn't send the request.
  * @retval true: request is under sending.
- * @post Through  user's callback function :200 status code + std::any<AsyncTS>* if successful.
+ * @post Through  user's callback function you get 200 status code + std::any<AsyncTS>* if successful.
 */
 bool AsyncTS::readMultipleFields(unsigned long channelNumber, const char *readAPIKey)
 {
@@ -1601,7 +1601,7 @@ bool AsyncTS::readMultipleFields(unsigned long channelNumber, const char *readAP
  * @param ruscb User's callback function to process the server response.
  * @retval false: AsyncTS client is busy. Couldn't send the request.
  * @retval true: request is under sending.
- * @post Through ruscb:200 status code +std::any<AsyncTS>* if successful.
+ * @post Through  user's callback function you get 200 status code + std::any<AsyncTS>* if successful.
 */
 bool AsyncTS::readMultipleFields(unsigned long channelNumber, const char * readAPIKey, readResponseUserCB ruscb)
 {
@@ -1623,7 +1623,7 @@ bool AsyncTS::readMultipleFields(unsigned long channelNumber, const char * readA
  * @param channelNumber Channel number
  * @retval false: AsyncTS client is busy. Couldn't send the request.
  * @retval true: request is under sending.
- * @post Through ruscb:200 status code + std::any<AsyncTS>* if successful.
+ * @post Through  user's callback function you get 200 status code + std::any<AsyncTS>* if successful.
 */
 bool AsyncTS::readMultipleFields(unsigned long channelNumber)
 {
@@ -1638,7 +1638,7 @@ bool AsyncTS::readMultipleFields(unsigned long channelNumber)
  * @param ruscb User's callback function to process the server response.
  * @retval false: AsyncTS client is busy. Couldn't send the request.
  * @retval true: request is under sending.
- * @post Through ruscb:200 status code + std::any<AsyncTS>* if successful.
+ * @post Through  user's callback function you get 200 status code + std::any<AsyncTS>* if successful.
 */
 bool AsyncTS::readMultipleFields(unsigned long channelNumber, readResponseUserCB ruscb)
 {
