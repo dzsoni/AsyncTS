@@ -51,14 +51,22 @@ https://github.com/me-no-dev/ESPAsyncTCP
 
 #ifdef ARDUINO_ARCH_ESP8266
 #include <ESPAsyncTCP.h>
+#ifndef SEMAPHORE_TAKE
 #define SEMAPHORE_TAKE(X)
+#endif
+#ifndef SEMAPHORE_GIVE
 #define SEMAPHORE_GIVE()
+#endif
 #endif
 
 #ifdef ARDUINO_ARCH_ESP32
 #include <AsyncTCP.h>
+#ifndef SEMAPHORE_TAKE
 #define SEMAPHORE_TAKE() xSemaphoreTake(_xSemaphore, portMAX_DELAY)
+#endif
+#ifndef SEMAPHORE_GIVE
 #define SEMAPHORE_GIVE() xSemaphoreGive(_xSemaphore)
+#endif
 #endif
 
 #ifdef DONT_COMPILE_DEBUG_LINES_AsyncTS
