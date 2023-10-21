@@ -43,7 +43,7 @@ void IntResponse(int errorcode, std::any* resp)
       Serial.println(" Bad_any_cast<int>");
       return;
     }
-      Serial.println("Response code:" + String(code));
+      Serial.println("Response code:" + String(errorcode));
       Serial.println("Response: " + String(*a));//dereference pointer
 }
 ...
