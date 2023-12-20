@@ -27,14 +27,14 @@ void writeServerResponse(int code)
 {
   Serial.println("Server response:" + String(code));
 }
-// User call back  function for read funtions (expect String)
+// User call back  function for read funtions (expect int)
 void readServerIntResponse(int code, std::any* resp)
 {
     auto* a = std::any_cast<int>(resp);
     if (!a) 
     {
         // Type-mismatch
-        Serial.println(" Bad_any_cast <String>");
+        Serial.println(" Bad_any_cast <Int>");
         return;
     }
     
