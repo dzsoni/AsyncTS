@@ -34,7 +34,7 @@ void readServerIntResponse(int code, std::any* resp)
     if (!a) 
     {
         // Type-mismatch
-        Serial.println(" Bad_any_cast <String>");
+        Serial.println(" Bad_any_cast <Int>");
         return;
     }
     
