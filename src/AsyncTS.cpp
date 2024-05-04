@@ -291,7 +291,7 @@ unsigned int AsyncTS::_send()
     size_t sent = 0;
     uint8_t *temp = new uint8_t[100];
     if (!temp) return 0;
-    
+
     while (supply)
     {
         size_t chunk = supply < 100 ? supply : 100;
