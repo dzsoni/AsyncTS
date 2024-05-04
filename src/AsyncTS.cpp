@@ -273,6 +273,15 @@ unsigned int AsyncTS::_send()
 {
     if (_request.available() == 0)
         return 0;
+    if( ! _client->connected())
+    {
+        _timeout =DEFAULT_RX_TIMEOUT;
+        return 0;
+    }
+    else if( ! _client->canSend())
+    {
+        return 0;
+    }
     DEBUG_ATS("_send() %d\r\n", _request.available());
 
     size_t supply = _request.available();
@@ -281,6 +290,8 @@ unsigned int AsyncTS::_send()
         supply = demand;
     size_t sent = 0;
     uint8_t *temp = new uint8_t[100];
+    if (!temp) return 0;
+    
     while (supply)
     {
         size_t chunk = supply < 100 ? supply : 100;

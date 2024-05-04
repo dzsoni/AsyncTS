@@ -86,6 +86,8 @@ https://github.com/me-no-dev/ESPAsyncTCP
 #define THINGSPEAK_PORT_NUMBER 80
 #define THINGSPEAK_HTTPS_PORT_NUMBER 443
 
+#define DEFAULT_RX_TIMEOUT 30000
+
 
 #ifdef ARDUINO_ARCH_ESP8266
 #define TS_USER_AGENT "atslib-arduino/" ATS_VER " (ESP8266)"
@@ -189,7 +191,7 @@ class AsyncTS
     bool            _writesession;
     unsigned int    _port = THINGSPEAK_PORT_NUMBER;     
     size_t          _contentLength;                // content-length
-    uint32_t        _timeout=5000;                 // Default or user overide RxTimeout in seconds
+    uint32_t        _timeout=DEFAULT_RX_TIMEOUT;   // Default or user overide RxTimeout in seconds
     uint32_t        _lastActivity;                 // Time of last activity
 
     writeResponseUserCB _writeResponseUserCB;
