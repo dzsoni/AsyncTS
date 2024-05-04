@@ -80,7 +80,7 @@ https://github.com/me-no-dev/ESPAsyncTCP
     }
 #endif
 
-#define ATS_VER "0.1.0"
+#define ATS_VER "0.1.1"
 
 #define THINGSPEAK_URL "api.thingspeak.com"
 #define THINGSPEAK_PORT_NUMBER 80
