@@ -87,10 +87,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a519bcf4e3606b8aa6b85ca46e3524671" id="r_a519bcf4e3606b8aa6b85ca46e3524671"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a519bcf4e3606b8aa6b85ca46e3524671">debug</a> ()</td></tr>
 <tr class="memdesc:a519bcf4e3606b8aa6b85ca46e3524671"><td class="mdescLeft">&#160;</td><td class="mdescRight">Is debug ON or OFF?  <br /></td></tr>
 <tr class="separator:a519bcf4e3606b8aa6b85ca46e3524671"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2334b5b986ea2d40fe28761492662e64" id="r_a2334b5b986ea2d40fe28761492662e64"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2334b5b986ea2d40fe28761492662e64">onWriteServerResponseUserCB</a> (<a class="el" href="_async_t_s_8hpp.html#a28e959d8d318805176da0b448a7ee67b">writeResponseUserCB</a> wrucb)</td></tr>
+<tr class="memitem:a2334b5b986ea2d40fe28761492662e64" id="r_a2334b5b986ea2d40fe28761492662e64"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2334b5b986ea2d40fe28761492662e64">onWriteServerResponseUserCB</a> (writeResponseUserCB wrucb)</td></tr>
 <tr class="memdesc:a2334b5b986ea2d40fe28761492662e64"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the callback function to process the server reponse. The user's function is called after these 'write' funtions: <a class="el" href="#aec1373882dfe18544fd5387ea1c607b2" title="Write a String value to a single field in a ThingSpeak channel.">writeField()</a>,<a class="el" href="#ae43f001966e95b4fe64d8571f287599d" title="Write a multi-field update.">writeFields()</a>,<a class="el" href="#a297e4abaf1f9128ea28fdea062c738f3" title="Write a raw POST to a ThingSpeak channel.">writeRaw()</a>  <br /></td></tr>
 <tr class="separator:a2334b5b986ea2d40fe28761492662e64"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac9a2aa1259ab566d7bc875313e9af243" id="r_ac9a2aa1259ab566d7bc875313e9af243"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac9a2aa1259ab566d7bc875313e9af243">onReadServerResponseUserCB</a> (<a class="el" href="_async_t_s_8hpp.html#a073163d663a4228ca402801d35456868">readResponseUserCB</a> reucb)</td></tr>
+<tr class="memitem:ac9a2aa1259ab566d7bc875313e9af243" id="r_ac9a2aa1259ab566d7bc875313e9af243"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac9a2aa1259ab566d7bc875313e9af243">onReadServerResponseUserCB</a> (readResponseUserCB reucb)</td></tr>
 <tr class="memdesc:ac9a2aa1259ab566d7bc875313e9af243"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the callback function to process the server reponse. The user's function is called after these 'read' funtions: <a class="el" href="#ac0a21bfc53a2e6124fb7df18aff729fa" title="Read the created-at timestamp associated with the latest update to a private ThingSpeak channel.">readCreatedAt()</a>, <a class="el" href="#ac33b0794f3443aeb74322bec405e3c32" title="Read the latest floating point value from a private ThingSpeak channel.">readFloatField()</a>, <a class="el" href="#a11518e8fc676ac5c53b69a7c652cb7a9" title="Read the latest int value from a private ThingSpeak channel.">readIntField()</a>, <a class="el" href="#af82904ae44e34f16420d0e037a1f6822" title="Read the latest long value from a private ThingSpeak channel.">readLongField()</a>, <a class="el" href="#ae5e8163bf177e7e625d9d323b5383300" title="Read all the field values, status message, location coordinates, and created-at timestamp associated ...">readMultipleFields()</a>, <a class="el" href="#a1866c5aa8848f4cb084d6970e44d568d" title="Read a raw response from a private ThingSpeak channel.">readRaw()</a>, <a class="el" href="#afee0d5089dcbbb7d53bc7b444d7c4e2f" title="Read the latest status from a private ThingSpeak channel.">readStatus()</a>, <a class="el" href="#aa3b0ed18bcee17bbd022dfb1d6281ea7" title="Read the latest string from a private ThingSpeak channel.">readStringField()</a>.  <br /></td></tr>
 <tr class="separator:ac9a2aa1259ab566d7bc875313e9af243"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0d56f0bfa82bce6f371f9572f02582f0" id="r_a0d56f0bfa82bce6f371f9572f02582f0"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0d56f0bfa82bce6f371f9572f02582f0">getLastTSErrorCode</a> ()</td></tr>
@@ -162,133 +162,133 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a297e4abaf1f9128ea28fdea062c738f3" id="r_a297e4abaf1f9128ea28fdea062c738f3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a297e4abaf1f9128ea28fdea062c738f3">writeRaw</a> (unsigned long channelNumber, String postMessage, const char *writeAPIKey)</td></tr>
 <tr class="memdesc:a297e4abaf1f9128ea28fdea062c738f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write a raw POST to a ThingSpeak channel.  <br /></td></tr>
 <tr class="separator:a297e4abaf1f9128ea28fdea062c738f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a75c91cad2827623ccfc50a5b51a25874" id="r_a75c91cad2827623ccfc50a5b51a25874"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a75c91cad2827623ccfc50a5b51a25874">writeRaw</a> (unsigned long channelNumber, String postMessage, const char *writeAPIKey, <a class="el" href="_async_t_s_8hpp.html#a28e959d8d318805176da0b448a7ee67b">writeResponseUserCB</a> wrucb)</td></tr>
+<tr class="memitem:a75c91cad2827623ccfc50a5b51a25874" id="r_a75c91cad2827623ccfc50a5b51a25874"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a75c91cad2827623ccfc50a5b51a25874">writeRaw</a> (unsigned long channelNumber, String postMessage, const char *writeAPIKey, writeResponseUserCB wrucb)</td></tr>
 <tr class="memdesc:a75c91cad2827623ccfc50a5b51a25874"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write a raw POST to a ThingSpeak channel.  <br /></td></tr>
 <tr class="separator:a75c91cad2827623ccfc50a5b51a25874"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1866c5aa8848f4cb084d6970e44d568d" id="r_a1866c5aa8848f4cb084d6970e44d568d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1866c5aa8848f4cb084d6970e44d568d">readRaw</a> (unsigned long channelNumber, String suffixURL, const char *readAPIKey)</td></tr>
 <tr class="memdesc:a1866c5aa8848f4cb084d6970e44d568d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read a raw response from a private ThingSpeak channel.  <br /></td></tr>
 <tr class="separator:a1866c5aa8848f4cb084d6970e44d568d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad6a945fd8daa0bfbc007d5f831e9c12c" id="r_ad6a945fd8daa0bfbc007d5f831e9c12c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad6a945fd8daa0bfbc007d5f831e9c12c">readRaw</a> (unsigned long channelNumber, String suffixURL, const char *readAPIKey, <a class="el" href="_async_t_s_8hpp.html#a073163d663a4228ca402801d35456868">readResponseUserCB</a> ruscb)</td></tr>
+<tr class="memitem:ad6a945fd8daa0bfbc007d5f831e9c12c" id="r_ad6a945fd8daa0bfbc007d5f831e9c12c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad6a945fd8daa0bfbc007d5f831e9c12c">readRaw</a> (unsigned long channelNumber, String suffixURL, const char *readAPIKey, readResponseUserCB ruscb)</td></tr>
 <tr class="memdesc:ad6a945fd8daa0bfbc007d5f831e9c12c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read a raw response from a private ThingSpeak channel.  <br /></td></tr>
 <tr class="separator:ad6a945fd8daa0bfbc007d5f831e9c12c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aec1373882dfe18544fd5387ea1c607b2" id="r_aec1373882dfe18544fd5387ea1c607b2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aec1373882dfe18544fd5387ea1c607b2">writeField</a> (unsigned long channelNumber, unsigned int field, String value, const char *writeAPIKey)</td></tr>
 <tr class="memdesc:aec1373882dfe18544fd5387ea1c607b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write a String value to a single field in a ThingSpeak channel.  <br /></td></tr>
 <tr class="separator:aec1373882dfe18544fd5387ea1c607b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae5e58dba49deee159ce81f0421137639" id="r_ae5e58dba49deee159ce81f0421137639"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae5e58dba49deee159ce81f0421137639">writeField</a> (unsigned long channelNumber, unsigned int field, String value, const char *writeAPIKey, <a class="el" href="_async_t_s_8hpp.html#a28e959d8d318805176da0b448a7ee67b">writeResponseUserCB</a> wrucb)</td></tr>
+<tr class="memitem:ae5e58dba49deee159ce81f0421137639" id="r_ae5e58dba49deee159ce81f0421137639"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae5e58dba49deee159ce81f0421137639">writeField</a> (unsigned long channelNumber, unsigned int field, String value, const char *writeAPIKey, writeResponseUserCB wrucb)</td></tr>
 <tr class="memdesc:ae5e58dba49deee159ce81f0421137639"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write a String value to a single field in a ThingSpeak channel.  <br /></td></tr>
 <tr class="separator:ae5e58dba49deee159ce81f0421137639"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4de8afd9c7032b10aad90034b2ffb3a5" id="r_a4de8afd9c7032b10aad90034b2ffb3a5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4de8afd9c7032b10aad90034b2ffb3a5">writeField</a> (unsigned long channelNumber, unsigned int field, int value, const char *writeAPIKey)</td></tr>
 <tr class="memdesc:a4de8afd9c7032b10aad90034b2ffb3a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write an integer value to a single field in a ThingSpeak channel.  <br /></td></tr>
 <tr class="separator:a4de8afd9c7032b10aad90034b2ffb3a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae0ee116aa55ca32bb75bf5c95c52a4d7" id="r_ae0ee116aa55ca32bb75bf5c95c52a4d7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae0ee116aa55ca32bb75bf5c95c52a4d7">writeField</a> (unsigned long channelNumber, unsigned int field, int value, const char *writeAPIKey, <a class="el" href="_async_t_s_8hpp.html#a28e959d8d318805176da0b448a7ee67b">writeResponseUserCB</a> wrucb)</td></tr>
+<tr class="memitem:ae0ee116aa55ca32bb75bf5c95c52a4d7" id="r_ae0ee116aa55ca32bb75bf5c95c52a4d7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae0ee116aa55ca32bb75bf5c95c52a4d7">writeField</a> (unsigned long channelNumber, unsigned int field, int value, const char *writeAPIKey, writeResponseUserCB wrucb)</td></tr>
 <tr class="memdesc:ae0ee116aa55ca32bb75bf5c95c52a4d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write an integer value to a single field in a ThingSpeak channel.  <br /></td></tr>
 <tr class="separator:ae0ee116aa55ca32bb75bf5c95c52a4d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a306f2afef9c33a91995f807b08cdbd7e" id="r_a306f2afef9c33a91995f807b08cdbd7e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a306f2afef9c33a91995f807b08cdbd7e">writeField</a> (unsigned long channelNumber, unsigned int field, long value, const char *writeAPIKey)</td></tr>
 <tr class="memdesc:a306f2afef9c33a91995f807b08cdbd7e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write a long value to a single field in a ThingSpeak channel.  <br /></td></tr>
 <tr class="separator:a306f2afef9c33a91995f807b08cdbd7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7055ba1459b63ffadebca4be01311c26" id="r_a7055ba1459b63ffadebca4be01311c26"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7055ba1459b63ffadebca4be01311c26">writeField</a> (unsigned long channelNumber, unsigned int field, long value, const char *writeAPIKey, <a class="el" href="_async_t_s_8hpp.html#a28e959d8d318805176da0b448a7ee67b">writeResponseUserCB</a> wrucb)</td></tr>
+<tr class="memitem:a7055ba1459b63ffadebca4be01311c26" id="r_a7055ba1459b63ffadebca4be01311c26"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7055ba1459b63ffadebca4be01311c26">writeField</a> (unsigned long channelNumber, unsigned int field, long value, const char *writeAPIKey, writeResponseUserCB wrucb)</td></tr>
 <tr class="memdesc:a7055ba1459b63ffadebca4be01311c26"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write a long value to a single field in a ThingSpeak channel.  <br /></td></tr>
 <tr class="separator:a7055ba1459b63ffadebca4be01311c26"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1a5f5d74826ec83ea0f2d49c7f29ee0b" id="r_a1a5f5d74826ec83ea0f2d49c7f29ee0b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1a5f5d74826ec83ea0f2d49c7f29ee0b">writeField</a> (unsigned long channelNumber, unsigned int field, float value, const char *writeAPIKey)</td></tr>
 <tr class="memdesc:a1a5f5d74826ec83ea0f2d49c7f29ee0b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write a floating point value to a single field in a ThingSpeak channel.  <br /></td></tr>
 <tr class="separator:a1a5f5d74826ec83ea0f2d49c7f29ee0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab06ab95b5008c6547f6ad4ebaedc65e1" id="r_ab06ab95b5008c6547f6ad4ebaedc65e1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab06ab95b5008c6547f6ad4ebaedc65e1">writeField</a> (unsigned long channelNumber, unsigned int field, float value, const char *writeAPIKey, <a class="el" href="_async_t_s_8hpp.html#a28e959d8d318805176da0b448a7ee67b">writeResponseUserCB</a> wrucb)</td></tr>
+<tr class="memitem:ab06ab95b5008c6547f6ad4ebaedc65e1" id="r_ab06ab95b5008c6547f6ad4ebaedc65e1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab06ab95b5008c6547f6ad4ebaedc65e1">writeField</a> (unsigned long channelNumber, unsigned int field, float value, const char *writeAPIKey, writeResponseUserCB wrucb)</td></tr>
 <tr class="memdesc:ab06ab95b5008c6547f6ad4ebaedc65e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write a floating point value to a single field in a ThingSpeak channel.  <br /></td></tr>
 <tr class="separator:ab06ab95b5008c6547f6ad4ebaedc65e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae43f001966e95b4fe64d8571f287599d" id="r_ae43f001966e95b4fe64d8571f287599d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae43f001966e95b4fe64d8571f287599d">writeFields</a> (unsigned long channelNumber, const char *writeAPIKey)</td></tr>
 <tr class="memdesc:ae43f001966e95b4fe64d8571f287599d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write a multi-field update.  <br /></td></tr>
 <tr class="separator:ae43f001966e95b4fe64d8571f287599d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a85a9a210d6f0072ea57451cbf160c17e" id="r_a85a9a210d6f0072ea57451cbf160c17e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a85a9a210d6f0072ea57451cbf160c17e">writeFields</a> (unsigned long channelNumber, const char *writeAPIKey, <a class="el" href="_async_t_s_8hpp.html#a28e959d8d318805176da0b448a7ee67b">writeResponseUserCB</a> wrucb)</td></tr>
+<tr class="memitem:a85a9a210d6f0072ea57451cbf160c17e" id="r_a85a9a210d6f0072ea57451cbf160c17e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a85a9a210d6f0072ea57451cbf160c17e">writeFields</a> (unsigned long channelNumber, const char *writeAPIKey, writeResponseUserCB wrucb)</td></tr>
 <tr class="memdesc:a85a9a210d6f0072ea57451cbf160c17e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write a multi-field update.  <br /></td></tr>
 <tr class="separator:a85a9a210d6f0072ea57451cbf160c17e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa3b0ed18bcee17bbd022dfb1d6281ea7" id="r_aa3b0ed18bcee17bbd022dfb1d6281ea7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa3b0ed18bcee17bbd022dfb1d6281ea7">readStringField</a> (unsigned long channelNumber, unsigned int field, const char *readAPIKey)</td></tr>
 <tr class="memdesc:aa3b0ed18bcee17bbd022dfb1d6281ea7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the latest string from a private ThingSpeak channel.  <br /></td></tr>
 <tr class="separator:aa3b0ed18bcee17bbd022dfb1d6281ea7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0d82151714b81d91d238a9108fcef5e5" id="r_a0d82151714b81d91d238a9108fcef5e5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0d82151714b81d91d238a9108fcef5e5">readStringField</a> (unsigned long channelNumber, unsigned int field, const char *readAPIKey, <a class="el" href="_async_t_s_8hpp.html#a073163d663a4228ca402801d35456868">readResponseUserCB</a> ruscb)</td></tr>
+<tr class="memitem:a0d82151714b81d91d238a9108fcef5e5" id="r_a0d82151714b81d91d238a9108fcef5e5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0d82151714b81d91d238a9108fcef5e5">readStringField</a> (unsigned long channelNumber, unsigned int field, const char *readAPIKey, readResponseUserCB ruscb)</td></tr>
 <tr class="memdesc:a0d82151714b81d91d238a9108fcef5e5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the latest string from a private ThingSpeak channel.  <br /></td></tr>
 <tr class="separator:a0d82151714b81d91d238a9108fcef5e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afee135f9c97805a1ab2aea6d389b8083" id="r_afee135f9c97805a1ab2aea6d389b8083"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afee135f9c97805a1ab2aea6d389b8083">readStringField</a> (unsigned long channelNumber, unsigned int field)</td></tr>
 <tr class="memdesc:afee135f9c97805a1ab2aea6d389b8083"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the latest string from a public ThingSpeak channel.  <br /></td></tr>
 <tr class="separator:afee135f9c97805a1ab2aea6d389b8083"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9b7ade3db150eac6fbb58f2e7cb72072" id="r_a9b7ade3db150eac6fbb58f2e7cb72072"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9b7ade3db150eac6fbb58f2e7cb72072">readStringField</a> (unsigned long channelNumber, unsigned int field, <a class="el" href="_async_t_s_8hpp.html#a073163d663a4228ca402801d35456868">readResponseUserCB</a> ruscb)</td></tr>
+<tr class="memitem:a9b7ade3db150eac6fbb58f2e7cb72072" id="r_a9b7ade3db150eac6fbb58f2e7cb72072"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9b7ade3db150eac6fbb58f2e7cb72072">readStringField</a> (unsigned long channelNumber, unsigned int field, readResponseUserCB ruscb)</td></tr>
 <tr class="memdesc:a9b7ade3db150eac6fbb58f2e7cb72072"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the latest string from a public ThingSpeak channel.  <br /></td></tr>
 <tr class="separator:a9b7ade3db150eac6fbb58f2e7cb72072"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac33b0794f3443aeb74322bec405e3c32" id="r_ac33b0794f3443aeb74322bec405e3c32"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac33b0794f3443aeb74322bec405e3c32">readFloatField</a> (unsigned long channelNumber, unsigned int field, const char *readAPIKey)</td></tr>
 <tr class="memdesc:ac33b0794f3443aeb74322bec405e3c32"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the latest floating point value from a private ThingSpeak channel.  <br /></td></tr>
 <tr class="separator:ac33b0794f3443aeb74322bec405e3c32"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0e5cd1efd415050678317d2271497351" id="r_a0e5cd1efd415050678317d2271497351"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0e5cd1efd415050678317d2271497351">readFloatField</a> (unsigned long channelNumber, unsigned int field, const char *readAPIKey, <a class="el" href="_async_t_s_8hpp.html#a073163d663a4228ca402801d35456868">readResponseUserCB</a> ruscb)</td></tr>
+<tr class="memitem:a0e5cd1efd415050678317d2271497351" id="r_a0e5cd1efd415050678317d2271497351"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0e5cd1efd415050678317d2271497351">readFloatField</a> (unsigned long channelNumber, unsigned int field, const char *readAPIKey, readResponseUserCB ruscb)</td></tr>
 <tr class="memdesc:a0e5cd1efd415050678317d2271497351"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the latest floating point value from a private ThingSpeak channel.  <br /></td></tr>
 <tr class="separator:a0e5cd1efd415050678317d2271497351"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a442b5c6c3fa6a1a6cf05425c0271ad34" id="r_a442b5c6c3fa6a1a6cf05425c0271ad34"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a442b5c6c3fa6a1a6cf05425c0271ad34">readFloatField</a> (unsigned long channelNumber, unsigned int field)</td></tr>
 <tr class="memdesc:a442b5c6c3fa6a1a6cf05425c0271ad34"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the latest floating point value from a public ThingSpeak channel.  <br /></td></tr>
 <tr class="separator:a442b5c6c3fa6a1a6cf05425c0271ad34"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aac8860206d1907ff55228f859cadccea" id="r_aac8860206d1907ff55228f859cadccea"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aac8860206d1907ff55228f859cadccea">readFloatField</a> (unsigned long channelNumber, unsigned int field, <a class="el" href="_async_t_s_8hpp.html#a073163d663a4228ca402801d35456868">readResponseUserCB</a> ruscb)</td></tr>
+<tr class="memitem:aac8860206d1907ff55228f859cadccea" id="r_aac8860206d1907ff55228f859cadccea"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aac8860206d1907ff55228f859cadccea">readFloatField</a> (unsigned long channelNumber, unsigned int field, readResponseUserCB ruscb)</td></tr>
 <tr class="memdesc:aac8860206d1907ff55228f859cadccea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the latest floating point value from a public ThingSpeak channel.  <br /></td></tr>
 <tr class="separator:aac8860206d1907ff55228f859cadccea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af82904ae44e34f16420d0e037a1f6822" id="r_af82904ae44e34f16420d0e037a1f6822"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af82904ae44e34f16420d0e037a1f6822">readLongField</a> (unsigned long channelNumber, unsigned int field, const char *readAPIKey)</td></tr>
 <tr class="memdesc:af82904ae44e34f16420d0e037a1f6822"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the latest long value from a private ThingSpeak channel.  <br /></td></tr>
 <tr class="separator:af82904ae44e34f16420d0e037a1f6822"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1d7322b3f188956617517e9be541ad3b" id="r_a1d7322b3f188956617517e9be541ad3b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1d7322b3f188956617517e9be541ad3b">readLongField</a> (unsigned long channelNumber, unsigned int field, const char *readAPIKey, <a class="el" href="_async_t_s_8hpp.html#a073163d663a4228ca402801d35456868">readResponseUserCB</a> ruscb)</td></tr>
+<tr class="memitem:a1d7322b3f188956617517e9be541ad3b" id="r_a1d7322b3f188956617517e9be541ad3b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1d7322b3f188956617517e9be541ad3b">readLongField</a> (unsigned long channelNumber, unsigned int field, const char *readAPIKey, readResponseUserCB ruscb)</td></tr>
 <tr class="memdesc:a1d7322b3f188956617517e9be541ad3b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the latest long value from a private ThingSpeak channel.  <br /></td></tr>
 <tr class="separator:a1d7322b3f188956617517e9be541ad3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1b00c5c300f4ae1f8ea560661febb23f" id="r_a1b00c5c300f4ae1f8ea560661febb23f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1b00c5c300f4ae1f8ea560661febb23f">readLongField</a> (unsigned long channelNumber, unsigned int field)</td></tr>
 <tr class="memdesc:a1b00c5c300f4ae1f8ea560661febb23f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the latest long value from a public ThingSpeak channel.  <br /></td></tr>
 <tr class="separator:a1b00c5c300f4ae1f8ea560661febb23f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a05d84ad1db3373202fa5d0b5658cefdc" id="r_a05d84ad1db3373202fa5d0b5658cefdc"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a05d84ad1db3373202fa5d0b5658cefdc">readLongField</a> (unsigned long channelNumber, unsigned int field, <a class="el" href="_async_t_s_8hpp.html#a073163d663a4228ca402801d35456868">readResponseUserCB</a> ruscb)</td></tr>
+<tr class="memitem:a05d84ad1db3373202fa5d0b5658cefdc" id="r_a05d84ad1db3373202fa5d0b5658cefdc"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a05d84ad1db3373202fa5d0b5658cefdc">readLongField</a> (unsigned long channelNumber, unsigned int field, readResponseUserCB ruscb)</td></tr>
 <tr class="memdesc:a05d84ad1db3373202fa5d0b5658cefdc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the latest long value from a public ThingSpeak channel.  <br /></td></tr>
 <tr class="separator:a05d84ad1db3373202fa5d0b5658cefdc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a11518e8fc676ac5c53b69a7c652cb7a9" id="r_a11518e8fc676ac5c53b69a7c652cb7a9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a11518e8fc676ac5c53b69a7c652cb7a9">readIntField</a> (unsigned long channelNumber, unsigned int field, const char *readAPIKey)</td></tr>
 <tr class="memdesc:a11518e8fc676ac5c53b69a7c652cb7a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the latest int value from a private ThingSpeak channel.  <br /></td></tr>
 <tr class="separator:a11518e8fc676ac5c53b69a7c652cb7a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a17a2e4e3eb8e40650b9682fcb8ec1fa6" id="r_a17a2e4e3eb8e40650b9682fcb8ec1fa6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a17a2e4e3eb8e40650b9682fcb8ec1fa6">readIntField</a> (unsigned long channelNumber, unsigned int field, const char *readAPIKey, <a class="el" href="_async_t_s_8hpp.html#a073163d663a4228ca402801d35456868">readResponseUserCB</a> ruscb)</td></tr>
+<tr class="memitem:a17a2e4e3eb8e40650b9682fcb8ec1fa6" id="r_a17a2e4e3eb8e40650b9682fcb8ec1fa6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a17a2e4e3eb8e40650b9682fcb8ec1fa6">readIntField</a> (unsigned long channelNumber, unsigned int field, const char *readAPIKey, readResponseUserCB ruscb)</td></tr>
 <tr class="memdesc:a17a2e4e3eb8e40650b9682fcb8ec1fa6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the latest int value from a private ThingSpeak channel.  <br /></td></tr>
 <tr class="separator:a17a2e4e3eb8e40650b9682fcb8ec1fa6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a799230a8114503ab86adb12da2d22fc1" id="r_a799230a8114503ab86adb12da2d22fc1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a799230a8114503ab86adb12da2d22fc1">readIntField</a> (unsigned long channelNumber, unsigned int field)</td></tr>
 <tr class="memdesc:a799230a8114503ab86adb12da2d22fc1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the latest int value from a public ThingSpeak channel.  <br /></td></tr>
 <tr class="separator:a799230a8114503ab86adb12da2d22fc1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4a4d824fcfacdd18552ff75489b097ad" id="r_a4a4d824fcfacdd18552ff75489b097ad"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4a4d824fcfacdd18552ff75489b097ad">readIntField</a> (unsigned long channelNumber, unsigned int field, <a class="el" href="_async_t_s_8hpp.html#a073163d663a4228ca402801d35456868">readResponseUserCB</a> ruscb)</td></tr>
+<tr class="memitem:a4a4d824fcfacdd18552ff75489b097ad" id="r_a4a4d824fcfacdd18552ff75489b097ad"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4a4d824fcfacdd18552ff75489b097ad">readIntField</a> (unsigned long channelNumber, unsigned int field, readResponseUserCB ruscb)</td></tr>
 <tr class="memdesc:a4a4d824fcfacdd18552ff75489b097ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the latest int value from a public ThingSpeak channel.  <br /></td></tr>
 <tr class="separator:a4a4d824fcfacdd18552ff75489b097ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae5e8163bf177e7e625d9d323b5383300" id="r_ae5e8163bf177e7e625d9d323b5383300"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae5e8163bf177e7e625d9d323b5383300">readMultipleFields</a> (unsigned long channelNumber, const char *readAPIKey)</td></tr>
 <tr class="memdesc:ae5e8163bf177e7e625d9d323b5383300"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read all the field values, status message, location coordinates, and created-at timestamp associated with the latest feed to a private ThingSpeak channel and store the values locally in variables within a struct.  <br /></td></tr>
 <tr class="separator:ae5e8163bf177e7e625d9d323b5383300"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8b88d7642e86f84d9f7b466bcbbbdfa1" id="r_a8b88d7642e86f84d9f7b466bcbbbdfa1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8b88d7642e86f84d9f7b466bcbbbdfa1">readMultipleFields</a> (unsigned long channelNumber, const char *readAPIKey, <a class="el" href="_async_t_s_8hpp.html#a073163d663a4228ca402801d35456868">readResponseUserCB</a> ruscb)</td></tr>
+<tr class="memitem:a8b88d7642e86f84d9f7b466bcbbbdfa1" id="r_a8b88d7642e86f84d9f7b466bcbbbdfa1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8b88d7642e86f84d9f7b466bcbbbdfa1">readMultipleFields</a> (unsigned long channelNumber, const char *readAPIKey, readResponseUserCB ruscb)</td></tr>
 <tr class="memdesc:a8b88d7642e86f84d9f7b466bcbbbdfa1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read all the field values, status message, location coordinates, and created-at timestamp associated with the latest feed to a private ThingSpeak channel and store the values locally in variables within a struct.  <br /></td></tr>
 <tr class="separator:a8b88d7642e86f84d9f7b466bcbbbdfa1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a393c042ebdad7e6a7e3ce169439644be" id="r_a393c042ebdad7e6a7e3ce169439644be"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a393c042ebdad7e6a7e3ce169439644be">readMultipleFields</a> (unsigned long channelNumber)</td></tr>
 <tr class="memdesc:a393c042ebdad7e6a7e3ce169439644be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read all the field values, status message, location coordinates, and created-at timestamp associated with the latest feed to a public ThingSpeak channel and store the values locally in variables within a struct.  <br /></td></tr>
 <tr class="separator:a393c042ebdad7e6a7e3ce169439644be"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad92c8a77ea1cd6ceca2bbc0e28a7f2da" id="r_ad92c8a77ea1cd6ceca2bbc0e28a7f2da"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad92c8a77ea1cd6ceca2bbc0e28a7f2da">readMultipleFields</a> (unsigned long channelNumber, <a class="el" href="_async_t_s_8hpp.html#a073163d663a4228ca402801d35456868">readResponseUserCB</a> ruscb)</td></tr>
+<tr class="memitem:ad92c8a77ea1cd6ceca2bbc0e28a7f2da" id="r_ad92c8a77ea1cd6ceca2bbc0e28a7f2da"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad92c8a77ea1cd6ceca2bbc0e28a7f2da">readMultipleFields</a> (unsigned long channelNumber, readResponseUserCB ruscb)</td></tr>
 <tr class="memdesc:ad92c8a77ea1cd6ceca2bbc0e28a7f2da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read all the field values, status message, location coordinates, and created-at timestamp associated with the latest feed to a public ThingSpeak channel and store the values locally in variables within a struct.  <br /></td></tr>
 <tr class="separator:ad92c8a77ea1cd6ceca2bbc0e28a7f2da"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac0a21bfc53a2e6124fb7df18aff729fa" id="r_ac0a21bfc53a2e6124fb7df18aff729fa"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac0a21bfc53a2e6124fb7df18aff729fa">readCreatedAt</a> (unsigned long channelNumber, const char *readAPIKey)</td></tr>
 <tr class="memdesc:ac0a21bfc53a2e6124fb7df18aff729fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the created-at timestamp associated with the latest update to a private ThingSpeak channel.  <br /></td></tr>
 <tr class="separator:ac0a21bfc53a2e6124fb7df18aff729fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5dd02814a7547915b2d4cade2652b25d" id="r_a5dd02814a7547915b2d4cade2652b25d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5dd02814a7547915b2d4cade2652b25d">readCreatedAt</a> (unsigned long channelNumber, const char *readAPIKey, <a class="el" href="_async_t_s_8hpp.html#a073163d663a4228ca402801d35456868">readResponseUserCB</a> ruscb)</td></tr>
+<tr class="memitem:a5dd02814a7547915b2d4cade2652b25d" id="r_a5dd02814a7547915b2d4cade2652b25d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5dd02814a7547915b2d4cade2652b25d">readCreatedAt</a> (unsigned long channelNumber, const char *readAPIKey, readResponseUserCB ruscb)</td></tr>
 <tr class="memdesc:a5dd02814a7547915b2d4cade2652b25d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the created-at timestamp associated with the latest update to a private ThingSpeak channel.  <br /></td></tr>
 <tr class="separator:a5dd02814a7547915b2d4cade2652b25d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a207c7d3fbe7e4bae7b2fd48ba3782331" id="r_a207c7d3fbe7e4bae7b2fd48ba3782331"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a207c7d3fbe7e4bae7b2fd48ba3782331">readCreatedAt</a> (unsigned long channelNumber)</td></tr>
 <tr class="memdesc:a207c7d3fbe7e4bae7b2fd48ba3782331"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the created-at timestamp associated with the latest update to a public ThingSpeak channel.  <br /></td></tr>
 <tr class="separator:a207c7d3fbe7e4bae7b2fd48ba3782331"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3a569ffee930fce8e54a1b128224549c" id="r_a3a569ffee930fce8e54a1b128224549c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3a569ffee930fce8e54a1b128224549c">readCreatedAt</a> (unsigned long channelNumber, <a class="el" href="_async_t_s_8hpp.html#a073163d663a4228ca402801d35456868">readResponseUserCB</a> ruscb)</td></tr>
+<tr class="memitem:a3a569ffee930fce8e54a1b128224549c" id="r_a3a569ffee930fce8e54a1b128224549c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3a569ffee930fce8e54a1b128224549c">readCreatedAt</a> (unsigned long channelNumber, readResponseUserCB ruscb)</td></tr>
 <tr class="memdesc:a3a569ffee930fce8e54a1b128224549c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the created-at timestamp associated with the latest update to a public ThingSpeak channel.  <br /></td></tr>
 <tr class="separator:a3a569ffee930fce8e54a1b128224549c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afee0d5089dcbbb7d53bc7b444d7c4e2f" id="r_afee0d5089dcbbb7d53bc7b444d7c4e2f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afee0d5089dcbbb7d53bc7b444d7c4e2f">readStatus</a> (unsigned long channelNumber, const char *readAPIKey)</td></tr>
 <tr class="memdesc:afee0d5089dcbbb7d53bc7b444d7c4e2f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the latest status from a private ThingSpeak channel.  <br /></td></tr>
 <tr class="separator:afee0d5089dcbbb7d53bc7b444d7c4e2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae1eab3a88dca8222183d95c22cc0594f" id="r_ae1eab3a88dca8222183d95c22cc0594f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae1eab3a88dca8222183d95c22cc0594f">readStatus</a> (unsigned long channelNumber, const char *readAPIKey, <a class="el" href="_async_t_s_8hpp.html#a073163d663a4228ca402801d35456868">readResponseUserCB</a> ruscb)</td></tr>
+<tr class="memitem:ae1eab3a88dca8222183d95c22cc0594f" id="r_ae1eab3a88dca8222183d95c22cc0594f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae1eab3a88dca8222183d95c22cc0594f">readStatus</a> (unsigned long channelNumber, const char *readAPIKey, readResponseUserCB ruscb)</td></tr>
 <tr class="memdesc:ae1eab3a88dca8222183d95c22cc0594f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the latest status from a private ThingSpeak channel.  <br /></td></tr>
 <tr class="separator:ae1eab3a88dca8222183d95c22cc0594f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa24e29e5cb64feeec171a1d7d456be19" id="r_aa24e29e5cb64feeec171a1d7d456be19"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa24e29e5cb64feeec171a1d7d456be19">readStatus</a> (unsigned long channelNumber)</td></tr>
 <tr class="memdesc:aa24e29e5cb64feeec171a1d7d456be19"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the latest status from a public ThingSpeak channel.  <br /></td></tr>
 <tr class="separator:aa24e29e5cb64feeec171a1d7d456be19"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8f783329eeeecd2727f4b821e6d43751" id="r_a8f783329eeeecd2727f4b821e6d43751"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8f783329eeeecd2727f4b821e6d43751">readStatus</a> (unsigned long channelNumber, <a class="el" href="_async_t_s_8hpp.html#a073163d663a4228ca402801d35456868">readResponseUserCB</a> ruscb)</td></tr>
+<tr class="memitem:a8f783329eeeecd2727f4b821e6d43751" id="r_a8f783329eeeecd2727f4b821e6d43751"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8f783329eeeecd2727f4b821e6d43751">readStatus</a> (unsigned long channelNumber, readResponseUserCB ruscb)</td></tr>
 <tr class="memdesc:a8f783329eeeecd2727f4b821e6d43751"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the latest status from a public ThingSpeak channel.  <br /></td></tr>
 <tr class="separator:a8f783329eeeecd2727f4b821e6d43751"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:aec8cac060ab46aff2fd89cc7b864b6ac" id="r_aec8cac060ab46aff2fd89cc7b864b6ac"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_async_t_s_8hpp.html#a7601fd592c092fb9b22c78d4922ce3c1">feed</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aec8cac060ab46aff2fd89cc7b864b6ac">lastFeed</a></td></tr>
+<tr class="memitem:aec8cac060ab46aff2fd89cc7b864b6ac" id="r_aec8cac060ab46aff2fd89cc7b864b6ac"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structfeed_record.html">feed</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aec8cac060ab46aff2fd89cc7b864b6ac">lastFeed</a></td></tr>
 <tr class="separator:aec8cac060ab46aff2fd89cc7b864b6ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
@@ -636,7 +636,7 @@ Public Attributes</h2></td></tr>
         <tr>
           <td class="memname">bool AsyncTS::onReadServerResponseUserCB </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="_async_t_s_8hpp.html#a073163d663a4228ca402801d35456868">readResponseUserCB</a></td>          <td class="paramname"><span class="paramname"><em>reucb</em></span></td><td>)</td>
+          <td class="paramtype">readResponseUserCB</td>          <td class="paramname"><span class="paramname"><em>reucb</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -662,7 +662,7 @@ Public Attributes</h2></td></tr>
         <tr>
           <td class="memname">bool AsyncTS::onWriteServerResponseUserCB </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="_async_t_s_8hpp.html#a28e959d8d318805176da0b448a7ee67b">writeResponseUserCB</a></td>          <td class="paramname"><span class="paramname"><em>wrucb</em></span></td><td>)</td>
+          <td class="paramtype">writeResponseUserCB</td>          <td class="paramname"><span class="paramname"><em>wrucb</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -771,7 +771,7 @@ Public Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="_async_t_s_8hpp.html#a073163d663a4228ca402801d35456868">readResponseUserCB</a></td>          <td class="paramname"><span class="paramname"><em>ruscb</em></span>&#160;)</td>
+          <td class="paramtype">readResponseUserCB</td>          <td class="paramname"><span class="paramname"><em>ruscb</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -810,7 +810,7 @@ Public Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="_async_t_s_8hpp.html#a073163d663a4228ca402801d35456868">readResponseUserCB</a></td>          <td class="paramname"><span class="paramname"><em>ruscb</em></span>&#160;)</td>
+          <td class="paramtype">readResponseUserCB</td>          <td class="paramname"><span class="paramname"><em>ruscb</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -943,7 +943,7 @@ Public Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="_async_t_s_8hpp.html#a073163d663a4228ca402801d35456868">readResponseUserCB</a></td>          <td class="paramname"><span class="paramname"><em>ruscb</em></span>&#160;)</td>
+          <td class="paramtype">readResponseUserCB</td>          <td class="paramname"><span class="paramname"><em>ruscb</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -988,7 +988,7 @@ Public Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="_async_t_s_8hpp.html#a073163d663a4228ca402801d35456868">readResponseUserCB</a></td>          <td class="paramname"><span class="paramname"><em>ruscb</em></span>&#160;)</td>
+          <td class="paramtype">readResponseUserCB</td>          <td class="paramname"><span class="paramname"><em>ruscb</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -1124,7 +1124,7 @@ Public Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="_async_t_s_8hpp.html#a073163d663a4228ca402801d35456868">readResponseUserCB</a></td>          <td class="paramname"><span class="paramname"><em>ruscb</em></span>&#160;)</td>
+          <td class="paramtype">readResponseUserCB</td>          <td class="paramname"><span class="paramname"><em>ruscb</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -1170,7 +1170,7 @@ Public Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="_async_t_s_8hpp.html#a073163d663a4228ca402801d35456868">readResponseUserCB</a></td>          <td class="paramname"><span class="paramname"><em>ruscb</em></span>&#160;)</td>
+          <td class="paramtype">readResponseUserCB</td>          <td class="paramname"><span class="paramname"><em>ruscb</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -1306,7 +1306,7 @@ Public Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="_async_t_s_8hpp.html#a073163d663a4228ca402801d35456868">readResponseUserCB</a></td>          <td class="paramname"><span class="paramname"><em>ruscb</em></span>&#160;)</td>
+          <td class="paramtype">readResponseUserCB</td>          <td class="paramname"><span class="paramname"><em>ruscb</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -1352,7 +1352,7 @@ Public Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="_async_t_s_8hpp.html#a073163d663a4228ca402801d35456868">readResponseUserCB</a></td>          <td class="paramname"><span class="paramname"><em>ruscb</em></span>&#160;)</td>
+          <td class="paramtype">readResponseUserCB</td>          <td class="paramname"><span class="paramname"><em>ruscb</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -1470,7 +1470,7 @@ Public Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="_async_t_s_8hpp.html#a073163d663a4228ca402801d35456868">readResponseUserCB</a></td>          <td class="paramname"><span class="paramname"><em>ruscb</em></span>&#160;)</td>
+          <td class="paramtype">readResponseUserCB</td>          <td class="paramname"><span class="paramname"><em>ruscb</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -1509,7 +1509,7 @@ Public Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="_async_t_s_8hpp.html#a073163d663a4228ca402801d35456868">readResponseUserCB</a></td>          <td class="paramname"><span class="paramname"><em>ruscb</em></span>&#160;)</td>
+          <td class="paramtype">readResponseUserCB</td>          <td class="paramname"><span class="paramname"><em>ruscb</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -1602,7 +1602,7 @@ Public Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="_async_t_s_8hpp.html#a073163d663a4228ca402801d35456868">readResponseUserCB</a></td>          <td class="paramname"><span class="paramname"><em>ruscb</em></span>&#160;)</td>
+          <td class="paramtype">readResponseUserCB</td>          <td class="paramname"><span class="paramname"><em>ruscb</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -1714,7 +1714,7 @@ Public Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="_async_t_s_8hpp.html#a073163d663a4228ca402801d35456868">readResponseUserCB</a></td>          <td class="paramname"><span class="paramname"><em>ruscb</em></span>&#160;)</td>
+          <td class="paramtype">readResponseUserCB</td>          <td class="paramname"><span class="paramname"><em>ruscb</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -1753,7 +1753,7 @@ Public Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="_async_t_s_8hpp.html#a073163d663a4228ca402801d35456868">readResponseUserCB</a></td>          <td class="paramname"><span class="paramname"><em>ruscb</em></span>&#160;)</td>
+          <td class="paramtype">readResponseUserCB</td>          <td class="paramname"><span class="paramname"><em>ruscb</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -1885,7 +1885,7 @@ Public Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="_async_t_s_8hpp.html#a073163d663a4228ca402801d35456868">readResponseUserCB</a></td>          <td class="paramname"><span class="paramname"><em>ruscb</em></span>&#160;)</td>
+          <td class="paramtype">readResponseUserCB</td>          <td class="paramname"><span class="paramname"><em>ruscb</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -1935,7 +1935,7 @@ Public Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="_async_t_s_8hpp.html#a073163d663a4228ca402801d35456868">readResponseUserCB</a></td>          <td class="paramname"><span class="paramname"><em>ruscb</em></span>&#160;)</td>
+          <td class="paramtype">readResponseUserCB</td>          <td class="paramname"><span class="paramname"><em>ruscb</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -2449,7 +2449,7 @@ Public Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="_async_t_s_8hpp.html#a28e959d8d318805176da0b448a7ee67b">writeResponseUserCB</a></td>          <td class="paramname"><span class="paramname"><em>wrucb</em></span>&#160;)</td>
+          <td class="paramtype">writeResponseUserCB</td>          <td class="paramname"><span class="paramname"><em>wrucb</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -2554,7 +2554,7 @@ Public Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="_async_t_s_8hpp.html#a28e959d8d318805176da0b448a7ee67b">writeResponseUserCB</a></td>          <td class="paramname"><span class="paramname"><em>wrucb</em></span>&#160;)</td>
+          <td class="paramtype">writeResponseUserCB</td>          <td class="paramname"><span class="paramname"><em>wrucb</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -2659,7 +2659,7 @@ Public Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="_async_t_s_8hpp.html#a28e959d8d318805176da0b448a7ee67b">writeResponseUserCB</a></td>          <td class="paramname"><span class="paramname"><em>wrucb</em></span>&#160;)</td>
+          <td class="paramtype">writeResponseUserCB</td>          <td class="paramname"><span class="paramname"><em>wrucb</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -2764,7 +2764,7 @@ Public Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="_async_t_s_8hpp.html#a28e959d8d318805176da0b448a7ee67b">writeResponseUserCB</a></td>          <td class="paramname"><span class="paramname"><em>wrucb</em></span>&#160;)</td>
+          <td class="paramtype">writeResponseUserCB</td>          <td class="paramname"><span class="paramname"><em>wrucb</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -2847,7 +2847,7 @@ Public Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="_async_t_s_8hpp.html#a28e959d8d318805176da0b448a7ee67b">writeResponseUserCB</a></td>          <td class="paramname"><span class="paramname"><em>wrucb</em></span>&#160;)</td>
+          <td class="paramtype">writeResponseUserCB</td>          <td class="paramname"><span class="paramname"><em>wrucb</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -2940,7 +2940,7 @@ Public Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="_async_t_s_8hpp.html#a28e959d8d318805176da0b448a7ee67b">writeResponseUserCB</a></td>          <td class="paramname"><span class="paramname"><em>wrucb</em></span>&#160;)</td>
+          <td class="paramtype">writeResponseUserCB</td>          <td class="paramname"><span class="paramname"><em>wrucb</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -2973,7 +2973,7 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="_async_t_s_8hpp.html#a7601fd592c092fb9b22c78d4922ce3c1">feed</a> AsyncTS::lastFeed</td>
+          <td class="memname"><a class="el" href="structfeed_record.html">feed</a> AsyncTS::lastFeed</td>
         </tr>
       </table>
 </div><div class="memdoc">
