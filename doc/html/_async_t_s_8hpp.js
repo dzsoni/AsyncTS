@@ -5,6 +5,7 @@ var _async_t_s_8hpp =
     [ "ATS_VER", "_async_t_s_8hpp.html#a03fd1ee785c100ae45d107b77ae9fd3b", null ],
     [ "DEBUG_ATS", "_async_t_s_8hpp.html#a4d024a358a85ebac2579abb4ee1aaf58", null ],
     [ "DEBUG_IOTA_PORT", "_async_t_s_8hpp.html#a183c728f523343f7e4ab3e1c776a292a", null ],
+    [ "DEFAULT_RX_TIMEOUT", "_async_t_s_8hpp.html#a955398d5360c7264f62dcb73858043a5", null ],
     [ "FIELDLENGTH_MAX", "_async_t_s_8hpp.html#a58071b9ac9d436dbea467ba53fe1ab39", null ],
     [ "FIELDNUM_MAX", "_async_t_s_8hpp.html#a4a65f3a1da66d3ae6a5c9023c10fcaf7", null ],
     [ "FIELDNUM_MIN", "_async_t_s_8hpp.html#a168d1b8e41a233871e533d446b2bd741", null ],
@@ -24,7 +25,7 @@ var _async_t_s_8hpp =
     [ "TS_OK_SUCCESS", "_async_t_s_8hpp.html#a56870c23a464aecc05aad618c47e5b5d", null ],
     [ "TS_USER_AGENT", "_async_t_s_8hpp.html#ad0c1f8c4abd75a28c13be8c2b44b96a6", null ],
     [ "feed", "_async_t_s_8hpp.html#a7601fd592c092fb9b22c78d4922ce3c1", null ],
-    [ "readResponseUserCB", "_async_t_s_8hpp.html#a3c370657903520e5215e5fb579a03203", null ],
+    [ "readResponseUserCB", "_async_t_s_8hpp.html#a073163d663a4228ca402801d35456868", null ],
     [ "returnValueCB", "_async_t_s_8hpp.html#ae647f18b45984b9daa1239741e32fdb3", null ],
     [ "writeResponseUserCB", "_async_t_s_8hpp.html#a28e959d8d318805176da0b448a7ee67b", null ]
 ];
