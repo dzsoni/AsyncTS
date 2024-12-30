@@ -487,7 +487,7 @@ void AsyncTS::setTimeout(int milliseconds)
  * @retval false: AsyncTS client is busy. Couldn't send the request.
  * @retval true: request is under sending.
 */
-bool AsyncTS::writeRaw(unsigned long channelNumber, String postMessage, const char *writeAPIKey)
+bool AsyncTS::_writeRaw(unsigned long channelNumber, String postMessage, const char *writeAPIKey)
 {
     _lastTSerrorcode=TS_OK_SUCCESS;
     DEBUG_ATS("ats::writeRaw(channelNumber:%lu message:%s writeAPIKey: %s)\r\n", channelNumber, postMessage, writeAPIKey);
@@ -538,13 +538,13 @@ bool AsyncTS::writeRaw(unsigned long channelNumber, String postMessage, const ch
         _lastTSerrorcode = TS_ERR_CONNECT_FAILED;
         return false;
     }
-    _writeResponseUserCB = wrucb;
-    return writeRaw(channelNumber,postMessage,writeAPIKey);
+    if(wrucb)_writeResponseUserCB = wrucb;
+    else {DEBUG_ATS("ats::writeRaw wrucb is null.");}
+    return _writeRaw(channelNumber,postMessage,writeAPIKey);
 }
 
 /**
   * @brief Read a raw response from a private ThingSpeak channel
-  * @pre Call onReadServerResponseUserCB() before.
   * @post User's callback need process std::any<String>*.
   * @param channelNumber Channnel number
   * @param suffixURL Raw URL to write to ThingSpeak as a String.  See the documentation at https://thingspeak.com/docs/channels#get_feed
@@ -590,27 +590,6 @@ bool AsyncTS::_isReady()
 
 /**
   * @brief Read a raw response from a private ThingSpeak channel
-  * @pre Call onReadServerResponseUserCB() before.
-  * @post User's callback need process std::any<String>*.
-  * @param channelNumber Channnel number
-  * @param suffixURL Raw URL to write to ThingSpeak as a String.  See the documentation at https://thingspeak.com/docs/channels#get_feed
-  * @param readAPIKey Read API key associated with the channel.  *If you share code with others, do _not_ share this key*
-  * @retval false: AsyncTS client is busy. Couldn't send the request.
-  * @retval true: request is under sending.
- */
-bool AsyncTS::readRaw(unsigned long channelNumber, String suffixURL, const char * readAPIKey)
-{
-    if (!_isReady())
-    {
-        DEBUG_ATS("ats::writeRaw Clinet is busy.");
-        _lastTSerrorcode = TS_ERR_CONNECT_FAILED;
-        return false;
-    }
-    _retValueSelector = [this](){ this->_readStringFieldCB(); };
-    return _readRaw(channelNumber,suffixURL,readAPIKey);
-}
-/**
-  * @brief Read a raw response from a private ThingSpeak channel
   * @post User's callback need process std::any<String>*.
   * @param channelNumber Channnel number
   * @param suffixURL Raw URL to write to ThingSpeak as a String.  See the documentation at https://thingspeak.com/docs/channels#get_feed
@@ -622,11 +601,12 @@ bool AsyncTS::readRaw(unsigned long channelNumber, String suffixURL, const char 
 {
     if (!_isReady())
     {
-        DEBUG_ATS("ats::writeRaw Clinet is busy.");
+        DEBUG_ATS("ats::ReadRaw Clinet is busy.");
         _lastTSerrorcode = TS_ERR_CONNECT_FAILED;
         return false;
     }
-    _readResponseUserCB = ruscb;
+    if(ruscb)_readResponseUserCB = ruscb;
+    else {DEBUG_ATS("ats::readRaw ruscb is null.");}
     _retValueSelector = [this](){ this->_readStringFieldCB(); };
     return _readRaw(channelNumber,suffixURL,readAPIKey);
 }
@@ -656,7 +636,7 @@ void AsyncTS::_readCreatedAtCB()
  * @retval false: AsyncTS client is busy. Couldn't send the request.
  * @retval true: request is under sending.
 */
-bool AsyncTS::readCreatedAt(unsigned long channelNumber, const char *readAPIKey)
+bool AsyncTS::_readCreatedAt(unsigned long channelNumber, const char *readAPIKey)
 {
     if (!_isReady())
     {
@@ -684,12 +664,13 @@ bool AsyncTS::readCreatedAt(unsigned long channelNumber, const char * readAPIKey
 {
     if (!_isReady())
     {
-        DEBUG_ATS("ats::writeRaw Clinet is busy.");
+        DEBUG_ATS("ats::readCreatedAt Clinet is busy.");
         _lastTSerrorcode = TS_ERR_CONNECT_FAILED;
         return false;
     }
-    _readResponseUserCB = ruscb;
-    return readCreatedAt(channelNumber,readAPIKey);
+    if(ruscb)_readResponseUserCB = ruscb;
+    else {DEBUG_ATS("ats::readCreatedAt ruscb is null.");}
+    return _readCreatedAt(channelNumber,readAPIKey);
 }
 
 
@@ -703,9 +684,9 @@ bool AsyncTS::readCreatedAt(unsigned long channelNumber, const char * readAPIKey
  * @retval true: request is under sending.
  * @post User's callback need process std::any<String>*.
 */
-bool AsyncTS::readCreatedAt(unsigned long channelNumber)
+bool AsyncTS::_readCreatedAt(unsigned long channelNumber)
 {
-    return readCreatedAt(channelNumber, NULL);
+    return _readCreatedAt(channelNumber, NULL);
 }
 
 /**
@@ -721,12 +702,13 @@ bool AsyncTS::readCreatedAt(unsigned long channelNumber, readResponseUserCB rusc
 {
     if (!_isReady())
     {
-        DEBUG_ATS("ats::writeRaw Clinet is busy.");
+        DEBUG_ATS("ats::readcreatedAt Clinet is busy.");
         _lastTSerrorcode = TS_ERR_CONNECT_FAILED;
         return false;
     }
-    _readResponseUserCB = ruscb;
-    return readCreatedAt(channelNumber,NULL);
+    if(ruscb)_readResponseUserCB = ruscb;
+    else {DEBUG_ATS("ats::readcreatedAt ruscb is null.");}
+    return _readCreatedAt(channelNumber,NULL);
 }
 /**
  * @brief  Set AsyncClient.
@@ -759,43 +741,7 @@ void AsyncTS::setDebug(bool debug)
 }
 
 /**
- * @brief Set the callback function to process the server reponse. The user's function is called after these
- * 'write' funtions: writeField(),writeFields(),writeRaw()
- * @param wrucb User's callback function.
- * @return False if couldn't set the callback function.
-*/
-bool AsyncTS::onWriteServerResponseUserCB(writeResponseUserCB wrucb)
-{
-  if (!_isReady())
-    {
-        DEBUG_ATS("ats::onWriteServerResponseUserCB: Client is busy.");
-        return false;
-    }
-    _writeResponseUserCB = wrucb;
-    return true;
-}
-
-/**
-* @brief Set the callback function to process the server reponse. The user's function is called after these
-* 'read' funtions: readCreatedAt(), readFloatField(), readIntField(), readLongField(), 
-* readMultipleFields(), readRaw(), readStatus(), readStringField().
-* @param reucb User's callback function.
-* @return False if couldn't set the callback function.
-*/
-bool AsyncTS::onReadServerResponseUserCB(readResponseUserCB reucb)
-{
-    if (!_isReady())
-    {
-        DEBUG_ATS("ats::onReadServerResponseUserCB: Client is busy.");
-        return false;
-    }
-    _readResponseUserCB = reucb;
-    return true;
-}
-
-/**
  * @brief Write a String value to a single field in a ThingSpeak channel.
- * @pre Call onWriteServerResponseUserCB() to set the user's callback function.
  * @param   channelNumber   Channel number.
  * @param   field           Field number (1-8) within the channel to write to.
  * @param   value           String value.
@@ -803,7 +749,7 @@ bool AsyncTS::onReadServerResponseUserCB(readResponseUserCB reucb)
  * @retval false: AsyncTS client is busy. Couldn't send the request.
  * @retval true: request is under sending.
 */
-bool AsyncTS::writeField(unsigned long channelNumber, unsigned int field, String value, const char *writeAPIKey)
+bool AsyncTS::_writeField(unsigned long channelNumber, unsigned int field, String value, const char *writeAPIKey)
 {
     _lastTSerrorcode=TS_OK_SUCCESS;
     DEBUG_ATS("ats::writeField begin \r\n")
@@ -842,7 +788,7 @@ bool AsyncTS::writeField(unsigned long channelNumber, unsigned int field, String
     postMessage.concat("=");
     postMessage.concat(value);
 
-    return writeRaw(channelNumber, postMessage, writeAPIKey);
+    return _writeRaw(channelNumber, postMessage, writeAPIKey);
 }
 /**
  * @brief Write a String value to a single field in a ThingSpeak channel
@@ -859,12 +805,13 @@ bool AsyncTS::writeField(unsigned long channelNumber, unsigned int field, String
 {
     if (!_isReady())
     {
-        DEBUG_ATS("ats::writeRaw Clinet is busy.");
+        DEBUG_ATS("ats::writeField Clinet is busy.");
         _lastTSerrorcode = TS_ERR_CONNECT_FAILED;
         return false;
     }
-    _writeResponseUserCB = wrucb;
-    return writeField(channelNumber,field,value,writeAPIKey);
+    if(wrucb)_writeResponseUserCB = wrucb;
+    else {DEBUG_ATS("ats::writeField wrucb is null.");}
+    return _writeField(channelNumber,field,value,writeAPIKey);
 }
 
 /**
@@ -879,7 +826,7 @@ bool AsyncTS::writeField(unsigned long channelNumber, unsigned int field, String
  * @retval false: AsyncTS client is busy. Couldn't send the request.
  * @retval true: request is under sending.
 */
-bool AsyncTS::writeField(unsigned long channelNumber, unsigned int field, int value, const char *writeAPIKey)
+bool AsyncTS::_writeField(unsigned long channelNumber, unsigned int field, int value, const char *writeAPIKey)
 {   
     if (!_isReady())
     {
@@ -889,7 +836,7 @@ bool AsyncTS::writeField(unsigned long channelNumber, unsigned int field, int va
     }
     char valueString[10]; // int range is -32768 to 32768, so 7 bytes including terminator, plus a little extra
     itoa(value, valueString, 10);
-    return writeField(channelNumber, field, valueString, writeAPIKey);
+    return _writeField(channelNumber, field, String(valueString), writeAPIKey);
 }
 
 /**
@@ -906,12 +853,13 @@ bool AsyncTS::writeField(unsigned long channelNumber, unsigned int field, int va
 {
     if (!_isReady())
     {
-        DEBUG_ATS("ats::writeRaw Clinet is busy.");
+        DEBUG_ATS("ats::writeField Clinet is busy.");
         _lastTSerrorcode = TS_ERR_CONNECT_FAILED;
         return false;
     }
-    _writeResponseUserCB = wrucb;
-    return writeField(channelNumber, field, value, writeAPIKey);
+    if(wrucb)_writeResponseUserCB = wrucb;
+    else {DEBUG_ATS("ats::writeField wrucb is null.");}
+    return _writeField(channelNumber, field, value, writeAPIKey);
 }
 
 /**
@@ -926,7 +874,7 @@ bool AsyncTS::writeField(unsigned long channelNumber, unsigned int field, int va
  * @retval false: AsyncTS client is busy. Couldn't send the request.
  * @retval true: request is under sending.
 */
-bool AsyncTS::writeField(unsigned long channelNumber, unsigned int field, long value, const char *writeAPIKey)
+bool AsyncTS::_writeField(unsigned long channelNumber, unsigned int field, long value, const char *writeAPIKey)
 {
     if (!_isReady())
     {
@@ -936,7 +884,7 @@ bool AsyncTS::writeField(unsigned long channelNumber, unsigned int field, long v
     }
     char valueString[15]; // long range is -2147483648 to 2147483647, so 12 bytes including terminator
     ltoa(value, valueString, 10);
-    return writeField(channelNumber, field, valueString, writeAPIKey);
+    return _writeField(channelNumber, field, valueString, writeAPIKey);
 }
 
 /**
@@ -953,12 +901,13 @@ bool AsyncTS::writeField(unsigned long channelNumber, unsigned int field, long v
 {
     if (!_isReady())
     {
-        DEBUG_ATS("ats::writeRaw Clinet is busy.");
+        DEBUG_ATS("ats::writeField Clinet is busy.");
         _lastTSerrorcode = TS_ERR_CONNECT_FAILED;
         return false;
     }
-    _writeResponseUserCB = wrucb;
-    return writeField(channelNumber, field, value, writeAPIKey);
+    if(wrucb)_writeResponseUserCB = wrucb;
+    else {DEBUG_ATS("ats::writeField wrucb is null.");}
+    return _writeField(channelNumber, field, value, writeAPIKey);
 }
 
 /**
@@ -973,7 +922,7 @@ bool AsyncTS::writeField(unsigned long channelNumber, unsigned int field, long v
  * @retval false: AsyncTS client is busy. Couldn't send the request.
  * @retval true: request is under sending.
 */
-bool AsyncTS::writeField(unsigned long channelNumber, unsigned int field, float value, const char *writeAPIKey)
+bool AsyncTS::_writeField(unsigned long channelNumber, unsigned int field, float value, const char *writeAPIKey)
 {
     if (!_isReady())
     {
@@ -990,7 +939,7 @@ bool AsyncTS::writeField(unsigned long channelNumber, unsigned int field, float 
             _writeResponseUserCB(_lastTSerrorcode);
         return false;
     }
-    return writeField(channelNumber, field, valueString, writeAPIKey);
+    return _writeField(channelNumber, field, valueString, writeAPIKey);
 }
 
 /**
@@ -1007,12 +956,13 @@ bool AsyncTS::writeField(unsigned long channelNumber, unsigned int field, float 
 {
     if (!_isReady())
     {
-        DEBUG_ATS("ats::writeRaw Clinet is busy.");
+        DEBUG_ATS("ats::writeField Clinet is busy.");
         _lastTSerrorcode = TS_ERR_CONNECT_FAILED;
         return false;
     }
-    _writeResponseUserCB = wrucb;
-    return writeField(channelNumber, field, value, writeAPIKey);
+    if(wrucb)_writeResponseUserCB = wrucb;
+    else {DEBUG_ATS("ats::writeField wrucb is null.");}
+    return _writeField(channelNumber, field, value, writeAPIKey);
 }
 
 /**
@@ -1026,7 +976,7 @@ bool AsyncTS::writeField(unsigned long channelNumber, unsigned int field, float 
  * @retval false: AsyncTS client is busy. Couldn't send the request.
  * @retval true: request is under sending. 
 */
-bool AsyncTS::writeFields(unsigned long channelNumber, const char *writeAPIKey)
+bool AsyncTS::_writeFields(unsigned long channelNumber, const char *writeAPIKey)
 {
     if (!_isReady())
     {
@@ -1173,12 +1123,13 @@ bool AsyncTS::writeFields(unsigned long channelNumber, const char * writeAPIKey,
 {
     if (!_isReady())
     {
-        DEBUG_ATS("ats::writeRaw Clinet is busy.");
+        DEBUG_ATS("ats::writeFields Clinet is busy.");
         _lastTSerrorcode = TS_ERR_CONNECT_FAILED;
         return false;
     }
-    _writeResponseUserCB = wrucb;
-    return writeFields(channelNumber, writeAPIKey);
+    if(wrucb)_writeResponseUserCB = wrucb;
+    else {DEBUG_ATS("ats::writeFields wrucb is null.");}
+    return _writeFields(channelNumber, writeAPIKey);
 }
 
 void AsyncTS::_readStringFieldCB()
@@ -1201,7 +1152,7 @@ void AsyncTS::_readStringFieldCB()
  * @retval false: AsyncTS client is busy. Couldn't send the request.
  * @retval true: request is under sending.
 */
-bool AsyncTS::readStringField(unsigned long channelNumber, unsigned int field, const char *readAPIKey)
+bool AsyncTS::_readStringField(unsigned long channelNumber, unsigned int field, const char *readAPIKey)
 {
     if (!_isReady())
     {
@@ -1228,12 +1179,13 @@ bool AsyncTS::readStringField(unsigned long channelNumber, unsigned int field, c
 {
     if (!_isReady())
     {
-        DEBUG_ATS("ats::writeRaw Clinet is busy.");
+        DEBUG_ATS("ats::readStringField Clinet is busy.");
         _lastTSerrorcode = TS_ERR_CONNECT_FAILED;
         return false;
     }
-    _readResponseUserCB = ruscb;
-    return readStringField(channelNumber,field, readAPIKey);
+    if(ruscb)_readResponseUserCB = ruscb;
+    else {DEBUG_ATS("ats::readStringField ruscb is null.");}
+    return _readStringField(channelNumber,field, readAPIKey);
 }
 
 /**
@@ -1246,7 +1198,7 @@ bool AsyncTS::readStringField(unsigned long channelNumber, unsigned int field, c
  * @retval false: AsyncTS client is busy. Couldn't send the request.
  * @retval true: request is under sending.
 */
-bool AsyncTS::readStringField(unsigned long channelNumber, unsigned int field)
+bool AsyncTS::_readStringField(unsigned long channelNumber, unsigned int field)
 {
     if (!_isReady())
     {
@@ -1270,12 +1222,13 @@ bool AsyncTS::readStringField(unsigned long channelNumber, unsigned int field , 
 {
     if (!_isReady())
     {
-        DEBUG_ATS("ats::writeRaw Clinet is busy.");
+        DEBUG_ATS("ats::readStringField Clinet is busy.");
         _lastTSerrorcode = TS_ERR_CONNECT_FAILED;
         return false;
     }
-    _readResponseUserCB = ruscb;
-    return readStringField(channelNumber,field);   
+    if(ruscb)_readResponseUserCB = ruscb;
+    else {DEBUG_ATS("ats::readStringField ruscb is null.");}
+    return _readStringField(channelNumber,field);   
 }
 
 void AsyncTS::_readFloatFieldCB()
@@ -1297,7 +1250,7 @@ void AsyncTS::_readFloatFieldCB()
  * @retval false: AsyncTS client is busy. Couldn't send the request.
  * @retval true: request is under sending.
 */
-bool AsyncTS::readFloatField(unsigned long channelNumber, unsigned int field, const char *readAPIKey)
+bool AsyncTS::_readFloatField(unsigned long channelNumber, unsigned int field, const char *readAPIKey)
 {
     if (!_isReady())
     {
@@ -1324,12 +1277,13 @@ bool AsyncTS::readFloatField(unsigned long channelNumber, unsigned int field, co
 {
     if (!_isReady())
     {
-        DEBUG_ATS("ats::writeRaw Clinet is busy.");
+        DEBUG_ATS("ats::readFloatField Clinet is busy.");
         _lastTSerrorcode = TS_ERR_CONNECT_FAILED;
         return false;
     }
-    _readResponseUserCB = ruscb;
-    return readFloatField(channelNumber , field, readAPIKey);
+    if(ruscb)_readResponseUserCB = ruscb;
+    else {DEBUG_ATS("ats::readFloatField ruscb is null.");}
+    return _readFloatField(channelNumber , field, readAPIKey);
 }
 /**
  * @brief Read the latest floating point value from a public ThingSpeak channel
@@ -1342,9 +1296,9 @@ bool AsyncTS::readFloatField(unsigned long channelNumber, unsigned int field, co
  * @retval true: request is under sending.
  * @note  NAN, INFINITY, and -INFINITY are valid results.
 */
-bool AsyncTS::readFloatField(unsigned long channelNumber, unsigned int field)
+bool AsyncTS::_readFloatField(unsigned long channelNumber, unsigned int field)
 {
-    return readFloatField(channelNumber, field, NULL);
+    return _readFloatField(channelNumber, field, NULL);
 }
 /**
  * @brief Read the latest floating point value from a public ThingSpeak channel
@@ -1361,11 +1315,12 @@ bool AsyncTS::readFloatField(unsigned long channelNumber, unsigned int field, re
 {
     if (!_isReady())
     {
-        DEBUG_ATS("ats::writeRaw Clinet is busy.");
+        DEBUG_ATS("ats::readFloatField Clinet is busy.");
         _lastTSerrorcode = TS_ERR_CONNECT_FAILED;
         return false;
     }
-    _readResponseUserCB = ruscb;
+    if(ruscb)_readResponseUserCB = ruscb;
+    else {DEBUG_ATS("ats::readFloatField ruscb is null.");}
     return readFloatField(channelNumber , field, NULL);
 }
 
@@ -1389,7 +1344,7 @@ void AsyncTS::_readLongFieldCB()
  * @post Through user's callback function: std::any<long>* points a value or 0 if the field is text or there is an error.
  * @note  NAN, INFINITY, and -INFINITY are valid results.
 */
-bool AsyncTS::readLongField(unsigned long channelNumber, unsigned int field, const char *readAPIKey)
+bool AsyncTS::_readLongField(unsigned long channelNumber, unsigned int field, const char *readAPIKey)
 {
     if (!_isReady())
     {
@@ -1417,12 +1372,13 @@ bool AsyncTS::readLongField(unsigned long channelNumber, unsigned int  field, co
 {
  if (!_isReady())
     {
-        DEBUG_ATS("ats::writeRaw Clinet is busy.");
+        DEBUG_ATS("ats::readLongField Clinet is busy.");
         _lastTSerrorcode = TS_ERR_CONNECT_FAILED;
         return false;
     }
- _readResponseUserCB = ruscb;
- return readLongField(channelNumber, field, readAPIKey);   
+ if(ruscb)_readResponseUserCB = ruscb;
+ else {DEBUG_ATS("ats::readLongField ruscb is null.");}
+ return _readLongField(channelNumber, field, readAPIKey);   
 }
 
 /**
@@ -1435,9 +1391,9 @@ bool AsyncTS::readLongField(unsigned long channelNumber, unsigned int  field, co
  * @post  Through user's callback function: std::any<long>* points a value or 0 if the field is text or there is an error.
  * @note  NAN, INFINITY, and -INFINITY are valid results.
 */
-bool AsyncTS::readLongField(unsigned long channelNumber, unsigned int field)
+bool AsyncTS::_readLongField(unsigned long channelNumber, unsigned int field)
 {
-    return readLongField(channelNumber, field, NULL);
+    return _readLongField(channelNumber, field, NULL);
 }
 
 /**
@@ -1454,11 +1410,12 @@ bool AsyncTS::readLongField(unsigned long channelNumber, unsigned int field, rea
 {
     if (!_isReady())
     {
-        DEBUG_ATS("ats::writeRaw Clinet is busy.");
+        DEBUG_ATS("ats::readLongField Clinet is busy.");
         _lastTSerrorcode = TS_ERR_CONNECT_FAILED;
         return false;
     }
-    _readResponseUserCB = ruscb;
+    if(ruscb)_readResponseUserCB = ruscb;
+    else {DEBUG_ATS("ats::readLongField ruscb is null.");}
     return readLongField(channelNumber,field, NULL);
 }
 
@@ -1482,7 +1439,7 @@ void AsyncTS::_readIntFieldCB()
  * @post  Through user's callback function: std::any<int>* points a value or 0 if the field is text or there is an error.
  * @note  NAN, INFINITY, and -INFINITY are valid results.
 */
-bool AsyncTS::readIntField(unsigned long channelNumber, unsigned int field, const char *readAPIKey)
+bool AsyncTS::_readIntField(unsigned long channelNumber, unsigned int field, const char *readAPIKey)
 {
     if (!_isReady())
     {
@@ -1509,12 +1466,13 @@ bool AsyncTS::readIntField(unsigned long channelNumber, unsigned int field, cons
 {
     if (!_isReady())
     {
-        DEBUG_ATS("ats::writeRaw Clinet is busy.");
+        DEBUG_ATS("ats::readIntField Clinet is busy.");
         _lastTSerrorcode = TS_ERR_CONNECT_FAILED;
         return false;
     }
-    _readResponseUserCB = ruscb;
-    return readIntField(channelNumber,field, readAPIKey);   
+    if(ruscb)_readResponseUserCB = ruscb;
+    else {DEBUG_ATS("ats::readIntField ruscb is null.");}
+    return _readIntField(channelNumber,field, readAPIKey);   
 }
 
 /**
@@ -1527,9 +1485,9 @@ bool AsyncTS::readIntField(unsigned long channelNumber, unsigned int field, cons
  * @post Through  user's callback function: std::any<int>* points a value or 0 if the field is text or there is an error.
  * @note  NAN, INFINITY, and -INFINITY are valid results.
 */
-bool AsyncTS::readIntField(unsigned long channelNumber, unsigned int field)
+bool AsyncTS::_readIntField(unsigned long channelNumber, unsigned int field)
 {
-    return readIntField(channelNumber, field, NULL);
+    return _readIntField(channelNumber, field, NULL);
 }
 
 /**
@@ -1546,11 +1504,12 @@ bool AsyncTS::readIntField(unsigned long channelNumber, unsigned int field, read
 {
     if (!_isReady())
     {
-        DEBUG_ATS("ats::writeRaw Clinet is busy.");
+        DEBUG_ATS("ats::readIntField Clinet is busy.");
         _lastTSerrorcode = TS_ERR_CONNECT_FAILED;
         return false;
     }
-    _readResponseUserCB = ruscb;
+    if(ruscb)_readResponseUserCB = ruscb;
+    else {DEBUG_ATS("ats::readIntField ruscb is null.");}
     return readIntField(channelNumber, field, NULL);
 }
 
@@ -1589,7 +1548,7 @@ void AsyncTS::_readMultipleFieldsCB()
  * @retval true: request is under sending.
  * @post Through  user's callback function you get 200 status code + std::any<AsyncTS>* if successful.
 */
-bool AsyncTS::readMultipleFields(unsigned long channelNumber, const char *readAPIKey)
+bool AsyncTS::_readMultipleFields(unsigned long channelNumber, const char *readAPIKey)
 {
     if (!_isReady())
     {
@@ -1618,12 +1577,13 @@ bool AsyncTS::readMultipleFields(unsigned long channelNumber, const char * readA
 {
     if (!_isReady())
     {
-        DEBUG_ATS("ats::writeRaw Clinet is busy.");
+        DEBUG_ATS("ats::readMultipleFields Clinet is busy.");
         _lastTSerrorcode = TS_ERR_CONNECT_FAILED;
         return false;
     }
-    _readResponseUserCB = ruscb;
-    return readMultipleFields(channelNumber, readAPIKey);
+    if(ruscb)_readResponseUserCB = ruscb;
+    else {DEBUG_ATS("ats::readMultipleFields ruscb is null.");}
+    return _readMultipleFields(channelNumber, readAPIKey);
 }
 
 /**
@@ -1636,9 +1596,9 @@ bool AsyncTS::readMultipleFields(unsigned long channelNumber, const char * readA
  * @retval true: request is under sending.
  * @post Through  user's callback function you get 200 status code + std::any<AsyncTS>* if successful.
 */
-bool AsyncTS::readMultipleFields(unsigned long channelNumber)
+bool AsyncTS::_readMultipleFields(unsigned long channelNumber)
 {
-    return readMultipleFields(channelNumber, NULL);
+    return _readMultipleFields(channelNumber, NULL);
 }
 
 /**
@@ -1655,11 +1615,12 @@ bool AsyncTS::readMultipleFields(unsigned long channelNumber, readResponseUserCB
 {
     if (!_isReady())
     {
-        DEBUG_ATS("ats::writeRaw Clinet is busy.");
+        DEBUG_ATS("ats::readMultipleFields Clinet is busy.");
         _lastTSerrorcode = TS_ERR_CONNECT_FAILED;
         return false;
     }
-    _readResponseUserCB = ruscb;
+    if(ruscb)_readResponseUserCB = ruscb;
+    else {DEBUG_ATS("ats::readMultipleFields ruscb is null.");}
     return  readMultipleFields(channelNumber, NULL);
 }
 
@@ -1681,7 +1642,7 @@ void AsyncTS::_readStatusCB()
  * @retval false: AsyncTS client is busy. Couldn't send the request.
  * @retval true: request is under sending.
 */
-bool AsyncTS::readStatus(unsigned long channelNumber, const char *readAPIKey)
+bool AsyncTS::_readStatus(unsigned long channelNumber, const char *readAPIKey)
 {
     if (!_isReady())
     {
@@ -1708,12 +1669,13 @@ bool AsyncTS::readStatus(unsigned long channelNumber, const char * readAPIKey, r
 {
     if (!_isReady())
     {
-        DEBUG_ATS("ats::writeRaw Clinet is busy.");
+        DEBUG_ATS("ats::readStatus Clinet is busy.");
         _lastTSerrorcode = TS_ERR_CONNECT_FAILED;
         return false;
     }
-    _readResponseUserCB = ruscb;
-    return readStatus(channelNumber,readAPIKey);    
+    if(ruscb)_readResponseUserCB = ruscb;
+    else {DEBUG_ATS("ats::readStatus ruscb is null.");}
+    return _readStatus(channelNumber,readAPIKey);    
 }
 
 /**
@@ -1724,9 +1686,9 @@ bool AsyncTS::readStatus(unsigned long channelNumber, const char * readAPIKey, r
  * @retval false: AsyncTS client is busy. Couldn't send the request.
  * @retval true: request is under sending.
 */
-bool AsyncTS::readStatus(unsigned long channelNumber)
+bool AsyncTS::_readStatus(unsigned long channelNumber)
 {
-    return readStatus(channelNumber, NULL);
+    return _readStatus(channelNumber, NULL);
 }
 /**
  * @brief Read the latest status from a public ThingSpeak channel.
@@ -1740,11 +1702,12 @@ bool AsyncTS::readStatus(unsigned long channelNumber, readResponseUserCB ruscb)
 {
     if (!_isReady())
     {
-        DEBUG_ATS("ats::writeRaw Clinet is busy.");
+        DEBUG_ATS("ats::readStatus Clinet is busy.");
         _lastTSerrorcode = TS_ERR_CONNECT_FAILED;
         return false;
     }
-    _readResponseUserCB = ruscb;
+    if(ruscb)_readResponseUserCB = ruscb;
+    else {DEBUG_ATS("ats::readStatus ruscb is null.");}
     return readStatus(channelNumber,NULL);
 }
 

@@ -80,7 +80,7 @@ https://github.com/me-no-dev/ESPAsyncTCP
     }
 #endif
 
-#define ATS_VER "0.1.1"
+#define ATS_VER "0.2.0"
 
 #define THINGSPEAK_URL "api.thingspeak.com"
 #define THINGSPEAK_PORT_NUMBER 80
@@ -191,7 +191,7 @@ class AsyncTS
     bool            _writesession;
     unsigned int    _port = THINGSPEAK_PORT_NUMBER;     
     size_t          _contentLength;                // content-length
-    uint32_t        _timeout=DEFAULT_RX_TIMEOUT;   // Default or user overide RxTimeout in seconds
+    uint32_t        _timeout=DEFAULT_RX_TIMEOUT;   // Default or user overide RxTimeout in milli seconds
     uint32_t        _lastActivity;                 // Time of last activity
 
     writeResponseUserCB _writeResponseUserCB;
@@ -222,10 +222,34 @@ class AsyncTS
     String  _getJSONValueByKey(String textToSearch, String key);
     String  _parseValues(String & multiContent, String key);
     unsigned int  _send();
-    bool    _readRaw(unsigned long channelNumber, String suffixURL, const char * readAPIKey);
     bool    _isReady();
+
+    bool _readRaw(unsigned long channelNumber, String suffixURL, const char * readAPIKey);
+    bool _writeRaw(unsigned long channelNumber, String postMessage, const char *writeAPIKey);
+
+    bool _writeField(unsigned long channelNumber, unsigned int field, String value, const char * writeAPIKey);
+    bool _writeField(unsigned long channelNumber, unsigned int field, int value, const char * writeAPIKey);
+    bool _writeField(unsigned long channelNumber, unsigned int field, long value, const char * writeAPIKey);
+    bool _writeField(unsigned long channelNumber, unsigned int field, float value, const char * writeAPIKey);
+    bool _writeFields(unsigned long channelNumber, const char * writeAPIKey);
+
+    bool _readStringField(unsigned long channelNumber, unsigned int field, const char * readAPIKey);
+    bool _readStringField(unsigned long channelNumber, unsigned int field);
+    bool _readFloatField(unsigned long channelNumber, unsigned int field, const char * readAPIKey);
+    bool _readFloatField(unsigned long channelNumber, unsigned int field);
+    bool _readLongField(unsigned long channelNumber, unsigned int  field, const char * readAPIKey);
+    bool _readLongField(unsigned long channelNumber, unsigned int field);
+    bool _readIntField(unsigned long channelNumber, unsigned int field, const char * readAPIKey);
+    bool _readIntField(unsigned long channelNumber, unsigned int field);
     
-    
+    bool _readMultipleFields(unsigned long channelNumber, const char * readAPIKey);
+    bool _readMultipleFields(unsigned long channelNumber);
+
+    bool _readCreatedAt(unsigned long channelNumber, const char * readAPIKey);
+    bool _readCreatedAt(unsigned long channelNumber);
+
+    bool _readStatus(unsigned long channelNumber, const char * readAPIKey);
+    bool _readStatus(unsigned long channelNumber);
 
     void    _onConnect(AsyncClient*);
     void    _onDisconnect(AsyncClient*);
@@ -260,8 +284,6 @@ public:
      */
     bool debug                (){ return _debug; };
 
-    bool onWriteServerResponseUserCB(writeResponseUserCB wrucb);
-    bool onReadServerResponseUserCB(readResponseUserCB reucb);
 
     /**
      * @brief Get last error code.
@@ -303,52 +325,34 @@ public:
     String getElevation();
     String getCreatedAt();
 
-    bool writeRaw(unsigned long channelNumber, String postMessage, const char *writeAPIKey);
+    
     bool writeRaw(unsigned long channelNumber, String postMessage, const char *writeAPIKey, writeResponseUserCB wrucb);
-    bool readRaw(unsigned long channelNumber, String suffixURL, const char * readAPIKey);
     bool readRaw(unsigned long channelNumber, String suffixURL, const char * readAPIKey, readResponseUserCB ruscb);
 
-    bool writeField(unsigned long channelNumber, unsigned int field, String value, const char * writeAPIKey);
+    
     bool writeField(unsigned long channelNumber, unsigned int field, String value, const char * writeAPIKey, writeResponseUserCB wrucb);
-    bool writeField(unsigned long channelNumber, unsigned int field, int value, const char * writeAPIKey);
     bool writeField(unsigned long channelNumber, unsigned int field, int value, const char * writeAPIKey, writeResponseUserCB wrucb);
-    bool writeField(unsigned long channelNumber, unsigned int field, long value, const char * writeAPIKey);
     bool writeField(unsigned long channelNumber, unsigned int field, long value, const char * writeAPIKey, writeResponseUserCB wrucb);
-    bool writeField(unsigned long channelNumber, unsigned int field, float value, const char * writeAPIKey);
     bool writeField(unsigned long channelNumber, unsigned int field, float value, const char * writeAPIKey, writeResponseUserCB wrucb);
-    bool writeFields(unsigned long channelNumber, const char * writeAPIKey);
     bool writeFields(unsigned long channelNumber, const char * writeAPIKey, writeResponseUserCB wrucb);
 
-    bool readStringField(unsigned long channelNumber, unsigned int field, const char * readAPIKey);
+    
     bool readStringField(unsigned long channelNumber, unsigned int field, const char * readAPIKey, readResponseUserCB ruscb);
-    bool readStringField(unsigned long channelNumber, unsigned int field);
     bool readStringField(unsigned long channelNumber, unsigned int field , readResponseUserCB ruscb);
-    bool readFloatField(unsigned long channelNumber, unsigned int field, const char * readAPIKey);
     bool readFloatField(unsigned long channelNumber, unsigned int field, const char * readAPIKey, readResponseUserCB ruscb);
-    bool readFloatField(unsigned long channelNumber, unsigned int field);
     bool readFloatField(unsigned long channelNumber, unsigned int field, readResponseUserCB ruscb);
-    bool readLongField(unsigned long channelNumber, unsigned int  field, const char * readAPIKey);
     bool readLongField(unsigned long channelNumber, unsigned int  field, const char * readAPIKey, readResponseUserCB ruscb);
-    bool readLongField(unsigned long channelNumber, unsigned int field);
     bool readLongField(unsigned long channelNumber, unsigned int field, readResponseUserCB ruscb);
-    bool readIntField(unsigned long channelNumber, unsigned int field, const char * readAPIKey);
     bool readIntField(unsigned long channelNumber, unsigned int field, const char * readAPIKey, readResponseUserCB ruscb);
-    bool readIntField(unsigned long channelNumber, unsigned int field);
     bool readIntField(unsigned long channelNumber, unsigned int field, readResponseUserCB ruscb);
 
-    bool readMultipleFields(unsigned long channelNumber, const char * readAPIKey);
     bool readMultipleFields(unsigned long channelNumber, const char * readAPIKey, readResponseUserCB ruscb);
-    bool readMultipleFields(unsigned long channelNumber);
     bool readMultipleFields(unsigned long channelNumber, readResponseUserCB ruscb);
-
-    bool readCreatedAt(unsigned long channelNumber, const char * readAPIKey);
+  
     bool readCreatedAt(unsigned long channelNumber, const char * readAPIKey, readResponseUserCB ruscb);
-    bool readCreatedAt(unsigned long channelNumber);
     bool readCreatedAt(unsigned long channelNumber, readResponseUserCB ruscb);
-
-    bool readStatus(unsigned long channelNumber, const char * readAPIKey);
+   
     bool readStatus(unsigned long channelNumber, const char * readAPIKey, readResponseUserCB ruscb);
-    bool readStatus(unsigned long channelNumber);
     bool readStatus(unsigned long channelNumber, readResponseUserCB ruscb);
 
 };
