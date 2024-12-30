@@ -480,7 +480,6 @@ void AsyncTS::setTimeout(int milliseconds)
 
 /**
  * @brief Write a raw POST to a ThingSpeak channel
- * @pre Call onWriteServerResponseUserCB() before.
  * @param channelNumber Thingspeak channel number
  * @param postMessage   Raw URL to write to ThingSpeak as a string.  See the documentation at https://thingspeak.com/docs/channels#update_feed.
  * @param writeAPIKey   WriteAPIkey for your channel  *If you share code with others, do _not_ share this key*
@@ -628,7 +627,6 @@ void AsyncTS::_readCreatedAtCB()
 /**
  * @brief Read the created-at timestamp associated with the latest update to a private ThingSpeak channel
  * 
- * @pre Call onReadServerResponseUserCB() before.
  * @post User's callback need process std::any<String>*.
  * 
  * @param channelNumber Channel number
@@ -677,7 +675,6 @@ bool AsyncTS::readCreatedAt(unsigned long channelNumber, const char * readAPIKey
 /**
  * @brief Read the created-at timestamp associated with the latest update to a public ThingSpeak channel
  * 
- * @pre Call onReadServerResponseUserCB() before.
  * 
  * @param channelNumber Channel number
  * @retval false: AsyncTS client is busy. Couldn't send the request.
@@ -817,7 +814,6 @@ bool AsyncTS::writeField(unsigned long channelNumber, unsigned int field, String
 /**
  * @brief Write an integer value to a single field in a ThingSpeak channel
  * 
- * @pre Call onWriteServerResponseUserCB() to set the user's callback function.
  * 
  * @param   channelNumber   Channel number
  * @param   field           Field number (1-8) within the channel to write to.
@@ -865,7 +861,6 @@ bool AsyncTS::writeField(unsigned long channelNumber, unsigned int field, int va
 /**
  * @brief Write a long value to a single field in a ThingSpeak channel
  * 
- * @pre Call onWriteServerResponseUserCB() to set the user's callback function.
  * 
  * @param   channelNumber   Channel number
  * @param   field           Field number (1-8) within the channel to write to.
@@ -913,7 +908,6 @@ bool AsyncTS::writeField(unsigned long channelNumber, unsigned int field, long v
 /**
  * @brief Write a floating point value to a single field in a ThingSpeak channel
  * 
- * @pre Call onWriteServerResponseUserCB() to set the user's callback function.
  * 
  * @param   channelNumber   Channel number
  * @param   field           Field number (1-8) within the channel to write to.
@@ -1144,7 +1138,6 @@ void AsyncTS::_readStringFieldCB()
 /**
  * @brief Read the latest string from a private ThingSpeak channel.
  * 
- * @pre First call  onReadServerResponseUserCB().
  * @post Through user' callback: std::any<string>* need process.
  * @param channelNumber Channel number
  * @param field Field number (1-8) within the channel to read from.
@@ -1191,7 +1184,6 @@ bool AsyncTS::readStringField(unsigned long channelNumber, unsigned int field, c
 /**
  * @brief Read the latest string from a public ThingSpeak channel.
  * 
- * @pre First call  onReadServerResponseUserCB(), to set the user's callback function.
  * @post Through user' callback: std::any<string>* need process.
  * @param channelNumber Channel number
  * @param field Field number (1-8) within the channel to read from.
@@ -1241,7 +1233,6 @@ void AsyncTS::_readFloatFieldCB()
 }
 /**
  * @brief Read the latest floating point value from a private ThingSpeak channel
- * @pre First call  onReadServerResponseUserCB(), to set the user's callback function.
  * @post Through user' callback: std::any<float>* points a value or 0 if the field is
  * text or there is an error.
  * @param channelNumber Channel number
@@ -1287,7 +1278,6 @@ bool AsyncTS::readFloatField(unsigned long channelNumber, unsigned int field, co
 }
 /**
  * @brief Read the latest floating point value from a public ThingSpeak channel
- * @pre First call  onReadServerResponseUserCB(), to set the user's callback function.
  * @post Through user' callback: std::any<float>* points a value or 0 if the field is
  * text or there is an error.
  * @param channelNumber Channel number
@@ -1335,7 +1325,6 @@ void AsyncTS::_readLongFieldCB()
 
 /**
  * @brief Read the latest long value from a private ThingSpeak channel
- * @pre First call  onReadServerResponseUserCB(), to set the user's callback function.
  * @param channelNumber Channel number
  * @param field Field number (1-8) within the channel to read from.
  * @param readAPIKey Read API key associated with the channel.  *If you share code with others, do _not_ share this key*
@@ -1383,7 +1372,6 @@ bool AsyncTS::readLongField(unsigned long channelNumber, unsigned int  field, co
 
 /**
  * @brief Read the latest long value from a public ThingSpeak channel
- * @pre First call  onReadServerResponseUserCB(), to set the user's callback function.
  * @param channelNumber Channel number
  * @param field Field number (1-8) within the channel to read from.
  * @retval false: AsyncTS client is busy. Couldn't send the request.
@@ -1430,7 +1418,6 @@ void AsyncTS::_readIntFieldCB()
 
 /**
  * @brief Read the latest int value from a private ThingSpeak channel.
- * @pre First call  onReadServerResponseUserCB(), to set the user's callback function.
  * @param channelNumber Channel number
  * @param field   Field number (1-8) within the channel to read from.
  * @param readAPIKey  Read API key associated with the channel.  *If you share code with others, do _not_ share this key*
@@ -1477,7 +1464,6 @@ bool AsyncTS::readIntField(unsigned long channelNumber, unsigned int field, cons
 
 /**
  * @brief Read the latest int value from a public ThingSpeak channel.
- * @pre First call  onReadServerResponseUserCB(), to set the user's callback function.
  * @param channelNumber Channel number
  * @param field  Field number (1-8) within the channel to read from.
  * @retval false: AsyncTS client is busy. Couldn't send the request.
@@ -1541,7 +1527,6 @@ void AsyncTS::_readMultipleFieldsCB()
  * @brief Read all the field values, status message, location coordinates, and created-at
  * timestamp associated with the latest feed to a private ThingSpeak channel and store the
  * values locally in variables within a struct.
- * @pre First call  onReadServerResponseUserCB(), to set the user's callback function.
  * @param channelNumber Channel number
  * @param readAPIKey Read API key associated with the channel. *If you share code with others, do _not_ share this key*
  * @retval false: AsyncTS client is busy. Couldn't send the request.
@@ -1590,7 +1575,6 @@ bool AsyncTS::readMultipleFields(unsigned long channelNumber, const char * readA
  * @brief Read all the field values, status message, location coordinates, and created-at
  * timestamp associated with the latest feed to a public ThingSpeak channel and store the
  * values locally in variables within a struct.
- * @pre First call  onReadServerResponseUserCB(), to set the user's callback function.
  * @param channelNumber Channel number
  * @retval false: AsyncTS client is busy. Couldn't send the request.
  * @retval true: request is under sending.
@@ -1635,7 +1619,6 @@ void AsyncTS::_readStatusCB()
 
 /**
  * @brief Read the latest status from a private ThingSpeak channel.
- * @pre Call onReadServerResponseUserCB() before.
  * @post User's callback need process std::any<String>*.
  * @param channelNumber Channel number
  * @param readAPIKey Read API key associated with the channel.  *If you share code with others, do _not_ share this key*
@@ -1680,7 +1663,6 @@ bool AsyncTS::readStatus(unsigned long channelNumber, const char * readAPIKey, r
 
 /**
  * @brief Read the latest status from a public ThingSpeak channel.
- * @pre Call onReadServerResponseUserCB() before.
  * @post User's callback need process std::any<String>*.
  * @param channelNumber Channel number
  * @retval false: AsyncTS client is busy. Couldn't send the request.
@@ -1848,7 +1830,6 @@ int AsyncTS::setStatus(String status)
 
 /**
  * @brief Set the Twitter account and message to use for an update to be tweeted.
- * @pre To send a message to twitter call setTwitterTweet() then call writeFields().
  * @param twitter Twitter account name as a String.
  * @param tweet Twitter message as a String (UTF-8) limited to 140 character.
  * @retval 200 if successful.
